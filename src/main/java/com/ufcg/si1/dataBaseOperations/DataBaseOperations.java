@@ -23,11 +23,11 @@ public class DataBaseOperations {
         return dataBaseOperations;
     }
 
-    public Produto saveProduct(Produto product) {
+    public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public Produto getProduct(String barCode) {
+    public Product getProduct(String barCode) {
         return productRepository.findOne(barCode);
     }
 }
