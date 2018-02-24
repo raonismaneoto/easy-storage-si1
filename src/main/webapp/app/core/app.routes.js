@@ -5,12 +5,7 @@ app.config(function ($routeProvider) {
     }).when("/products",{
         templateUrl: "app/core/main/searchProductView.html",
         controller: "SearchProductCtrl"
-    })
-    //     .when("/products/create-product",{
-    //     templateUrl: "view/createProductView.html",
-    //     controller: "CreateProductCtrl"
-    // })
-        .otherwise({
+    }).otherwise({
         redirectTo: '/'
     });
 });

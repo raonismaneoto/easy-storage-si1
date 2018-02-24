@@ -24,7 +24,9 @@ dist/
 nbdist/
 .nb-gradle/
 
-
 ### Node ###
 node_modules/
 bin/
+
+### VSCode ###
+.vscode/*
