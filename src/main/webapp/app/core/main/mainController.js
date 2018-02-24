@@ -67,7 +67,7 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
     $scope.pesquisarProdutoPorId = function(id) {
         // implementar
         console.log(id)
-        $http.get("http://localhost:8080/api/produto/" + id)
+        $http.get("http://localhost:8080/api/product/" + id)
             .then(function successCallback(response) {
                 $scope.productsList = [
                     response.data
@@ -137,17 +137,7 @@ app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr) 
 
     this.createProduct = function (product) {
 
-        // if (situacao) {
-        //     if (situacao === 1) {
-        //         product.situacao = 1
-        //     } else {
-        //         product.situacao = 2
-        //     }
-        // }
-
-        // product.situacao = situacao === 1 ? 1 : 2;
-
-        $http.post("http://localhost:8080/api/produto/", JSON.stringify(product))
+        $http.post("http://localhost:8080/api/product/", JSON.stringify(product))
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
@@ -206,8 +196,8 @@ app.controller("CriarLoteCtrl", function ($scope, $uibModalInstance, $http, toas
         opened : false
     };
 
-    $scope.dataDeValidade = new Date();
-    $scope.numeroDeItens = 0;
+    $scope.expirationDate = new Date();
+    $scope.numberOfItens = 0;
 
     $scope.dateOptions = {
         formatYear: 'yy',
@@ -218,12 +208,12 @@ app.controller("CriarLoteCtrl", function ($scope, $uibModalInstance, $http, toas
     $scope.submit = function (dataDeValidade, numeroDeItens) {
 
         //adicionar
-        var lote = {
-            dataDeValidade: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
-            numeroDeItens: numeroDeItens
+        var batch = {
+            expirationDate: dataDeValidade.getDay() + "/" + (dataDeValidade.getMonth() + 1) + dataDeValidade.getFullYear(),
+            numberOfItens: numeroDeItens
         }
 
-        $http.post("http://localhost:8080/api/produto/" + produto.id + "/lote", JSON.stringify(lote))
+        $http.post("http://localhost:8080/api/product/" + produto.id + "/batch", JSON.stringify(batch))
             .then(function success(response) {
                 console.log(response)
                 if (response.status === 201) {
