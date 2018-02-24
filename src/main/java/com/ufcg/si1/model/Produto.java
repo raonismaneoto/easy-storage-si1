@@ -3,7 +3,10 @@ package com.ufcg.si1.model;
 import java.math.BigDecimal;
 
 import exceptions.ObjetoInvalidoException;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Produto {
 
 	private long id;
@@ -12,6 +15,7 @@ public class Produto {
 
 	private BigDecimal preco;
 
+	@Id
 	private String codigoBarra;
 
 	private String fabricante;

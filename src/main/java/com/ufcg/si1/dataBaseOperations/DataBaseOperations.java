@@ -1,7 +1,8 @@
-import src.main.java.com.ufcg.si1.repositories.ProductRepository;
+package com.ufcg.si1.dataBaseOperations;
+import com.ufcg.si1.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import src.main.java.com.ufcg.si1.model.*;
+import com.ufcg.si1.model.*;
 
 @Component
 public class DataBaseOperations {
@@ -22,11 +23,11 @@ public class DataBaseOperations {
         return dataBaseOperations;
     }
 
-    public saveProduct(Produto product) {
+    public Produto saveProduct(Produto product) {
         return productRepository.save(product);
     }
 
-    public getProduct(String barCode) {
+    public Produto getProduct(String barCode) {
         return productRepository.findOne(barCode);
     }
 }

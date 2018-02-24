@@ -25,6 +25,8 @@ import com.ufcg.si1.service.ProdutoServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 
 import exceptions.ObjetoInvalidoException;
+import com.ufcg.si1.dataBaseOperations.DataBaseOperations;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +35,8 @@ public class RestApiController {
 
 	ProdutoService produtoService = new ProdutoServiceImpl();
 	LoteService loteService = new LoteServiceImpl();
+	@Autowired
+    private DataBaseOperations dataBaseOperations;
 
 	// -------------------Retrieve All
 	// Products---------------------------------------------
@@ -52,34 +56,9 @@ public class RestApiController {
 	// Produto-------------------------------------------
 
 	@RequestMapping(value = "/produto/", method = RequestMethod.POST)
-	public ResponseEntity<?> criarProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
-
-		boolean produtoExiste = false;
-
-		for (Produto p : produtoService.findAllProdutos()) {
-			if (p.getCodigoBarra().equals(produto.getCodigoBarra())) {
-				produtoExiste = true;
-			}
-		}
-
-		if (produtoExiste) {
-			return new ResponseEntity(new CustomErrorType("O produto " + produto.getNome() + " do fabricante "
-					+ produto.getFabricante() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
-		}
-
-		try {
-			produto.mudaSituacao(Produto.INDISPONIVEL);
-		} catch (ObjetoInvalidoException e) {
-			return new ResponseEntity(new CustomErrorType("Error: Produto" + produto.getNome() + " do fabricante "
-					+ produto.getFabricante() + " alguma coisa errada aconteceu!"), HttpStatus.NOT_ACCEPTABLE);
-		}
-
-		produtoService.saveProduto(produto);
-
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/produto/{id}").buildAndExpand(produto.getId()).toUri());
-
-		return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+	public ResponseEntity<?> criarProduto(@RequestBody Produto product, UriComponentsBuilder ucBuilder) {
+		dataBaseOperations.saveProduct(product);
+		return new ResponseEntity<Produto>(product, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
