@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import com.ufcg.si1.model.enumerations.Status;
 
 import exceptions.NonExistentObjectException;
+import javax.persistence.Id;
+import javax.persistence.Entity;
 
+@Entity
 public class Product {
 
 	private long id;
@@ -13,6 +16,7 @@ public class Product {
 
 	private BigDecimal price;
 
+	@Id
 	private String barCode;
 
 	private String producer;

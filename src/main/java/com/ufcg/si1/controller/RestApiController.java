@@ -21,15 +21,20 @@ import com.ufcg.si1.service.ProductService;
 import com.ufcg.si1.service.ProductServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 
+import exceptions.ObjetoInvalidoException;
+import com.ufcg.si1.dataBaseOperations.DataBaseOperations;
+import org.springframework.beans.factory.annotation.Autowired;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class RestApiController {
 
+	@Autowired
+    private DataBaseOperations dataBaseOperations;
 	BatchService batchService = new BatchServiceImpl();
 	ProductService productService = new ProductServiceImpl();
 
-	//Retrieving all products
 	@RequestMapping(value = "/product/", method = RequestMethod.GET)
 	public ResponseEntity<List<Product>> listAllProducts() {
 		List<Product> products = productService.findAllProducts();
@@ -41,8 +46,6 @@ public class RestApiController {
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 
-
-	//Create a new product if this product does not exists yet
 	@RequestMapping(value = "/product/", method = RequestMethod.POST)
 	public ResponseEntity<?> createProduct(@RequestBody Product product, UriComponentsBuilder ucBuilder) {
 		if (productService.doesProductExists(product)) {
@@ -50,10 +53,11 @@ public class RestApiController {
 					+ product.getProducer() + " ja esta cadastrado!"), HttpStatus.CONFLICT);
 		}
 
-		product.setStatus(Status.UNAVAILABLE);
-		productService.saveProduct(product);
+		Product productToReturn = dataBaseOperations.saveProduct(product);
 
-		return new ResponseEntity<Product>(product, HttpStatus.CREATED);
+		productToReturn.setStatus(Status.UNAVAILABLE);
+
+		return new ResponseEntity<Product>(productToReturn, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
