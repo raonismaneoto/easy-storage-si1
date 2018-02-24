@@ -27,3 +27,4 @@ nbdist/
 
 ### Node ###
 node_modules/
+bin/
