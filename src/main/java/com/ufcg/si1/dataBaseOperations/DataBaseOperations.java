@@ -1,5 +1,7 @@
 package com.ufcg.si1.dataBaseOperations;
 import com.ufcg.si1.repositories.ProductRepository;
+import com.ufcg.si1.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ufcg.si1.model.*;
@@ -9,6 +11,9 @@ public class DataBaseOperations {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private static DataBaseOperations dataBaseOperations;
 
@@ -29,5 +34,13 @@ public class DataBaseOperations {
 
     public Product getProduct(String barCode) {
         return productRepository.findOne(barCode);
+    }
+
+    public User getUser(String username) {
+        return userRepository.findOne(username);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }
