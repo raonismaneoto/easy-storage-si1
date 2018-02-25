@@ -1,16 +1,16 @@
-app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr, mainService) {
+app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, mainService) {
 
-    var vm = this;
+    var viewModel = this;
 
-    vm.product = {};
+    viewModel.product = {};
 
-    vm.listaDeSituacoes = [
+    viewModel.listaDeSituacoes = [
         {
-            nome: "Disponivel",
-            valor: 1
+            label: "Disponivel",
+            value: 1
         }, {
-            nome: "Em Falta",
-            valor: 2
+            label: "Em Falta",
+            value: 2
         }
     ];
 
@@ -20,7 +20,7 @@ app.controller("CreateProductCtrl", function ($uibModalInstance, $http, toastr, 
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
-                    vm.product = {};
+                    viewModel.product = {};
                     console.log(response)
                     $uibModalInstance.close(201);
                 }

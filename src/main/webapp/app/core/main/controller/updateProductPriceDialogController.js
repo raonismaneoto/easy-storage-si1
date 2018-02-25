@@ -1,4 +1,4 @@
-app.controller("UpdateProductPriceCtrl", function ($scope, $uibModalInstance, mainService, toastr, product) {
+app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstance, mainService, toastr, product) {
 
     $scope.product = product;
 
