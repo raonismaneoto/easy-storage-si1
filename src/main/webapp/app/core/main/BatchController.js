@@ -1,4 +1,4 @@
-app.controller("CreateBatchCtrl", function ($scope, $uibModalInstance, $http, toastr, product, mainService) {
+app.controller("BatchController", function ($scope, $uibModalInstance, $http, toastr, product, mainService) {
 
     $scope.produto = product;
     $scope.dateformat = 'dd/MM/yyyy';
