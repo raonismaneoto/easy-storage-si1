@@ -100,27 +100,6 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         });
     };
 
-    $scope.pesquisarProdutoPorId = function(id) {
-        // implementar
-        console.log(id)
-        $http.get("http://localhost:8080/api/product/" + id)
-            .then(function successCallback(response) {
-                $scope.productsList = [
-                    response.data
-                ]
-                console.error("Não carregou")
-            }, function errorCallback(error) {
-                console.error(error);
-                if (error.status === 404) {
-                    console.log(error);
-                    console.log(error.errorMessage);
-                    toastr.error(error.data.errorMessage);
-                } else if (error.status === 400) {
-                    toastr.error("Produto não encontrado");
-                }
-            });
-    };
-
     $scope.openCriarLoteDialog = function(product) {
 
         var modalInstance = $uibModal.open({
