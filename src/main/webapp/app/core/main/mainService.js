@@ -1,4 +1,4 @@
-app.factory("mainService", function ($http,BASE_SERVER_URL) {
+app.factory("mainService", function ($http,BASE_SERVER_URL, AuthService) {
 
     return {
         getAllProducts: _getAllProducts,

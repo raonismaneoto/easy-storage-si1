@@ -16,4 +16,9 @@ public class Admin extends User{
         this.permission = UserPermissions.ADMIN;
     }
 
+    public void setProperties(String username) {
+        this.username = username;
+        this.permission = UserPermissions.ADMIN;
+    }
+
 }

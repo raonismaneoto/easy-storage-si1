@@ -34,7 +34,7 @@ public abstract class User {
         this.password = newPassword;
     }
 
-    public UserPermissions getPermissions() {
+    public UserPermissions getPermission() {
         return this.permission;
     }
 

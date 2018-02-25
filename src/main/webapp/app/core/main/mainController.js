@@ -51,26 +51,6 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
         });
     };
 
-    $scope.openLoginDialog = function() {
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'Login',
-            ariaDescribedBy: 'Formulário de Autenticação do Usuário',
-            templateUrl: 'app/core/main/loginView.html',
-            controller: '',
-            controllerAs: ''
-        });
-    };
-
-    $scope.openRegisterDialog = function() {
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'Register',
-            ariaDescribedBy: 'Formulário de Registo do Usuário',
-            templateUrl: 'app/core/main/registerView.html',
-            controller: '',
-            controllerAs: ''
-        });
-    };
-
     $scope.openAtribuirPrecoParaProdutoDialog = function(product) {
 
         // var modalInstance = $uibModal.open({
