@@ -4,6 +4,17 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
     // $scope.title = "Search Product";
     $scope.productsList = [];
     $scope.produtos = [];
+    $scope.criteria = [
+        {
+            show: 'Nome',
+            attribute: 'name'
+        }, {
+            show: 'Preço',
+            attribute: 'price'
+        }, {
+            show: 'Categoria',
+            attribute: 'category'
+        }];
 
     var loadProductsList = function () {
         // $http.get("http://localhost:8080/api/")
@@ -17,6 +28,11 @@ app.controller("SearchProductCtrl", function ($scope, $uibModal, $http, toastr,$
             }, function errorCallback(error) {
                 console.log(error);
             });
+    };
+
+    $scope.orderProductsBy = function (field) {
+        $scope.criterion = field;
+        $scope.orderDirection = !$scope.orderDirection;
     };
 
     $scope.openCreateProductDialog = function() {
