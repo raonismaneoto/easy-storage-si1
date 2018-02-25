@@ -17,14 +17,14 @@ app.factory("mainService", function ($http, BASE_SERVER_URL) {
     }
 
     function _getProductById(id) {
-        return $http.get("http://localhost:8080/api/product/" + id)
+        return $http.get("/api/product/" + id)
     }
     
     function _createProduct(product) {
-        return $http.post("http://localhost:8080/api/product/", JSON.stringify(product))
+        return $http.post("/api/product/", JSON.stringify(product))
     }
 
     function _createBatch(product, batch) {
-        return $http.post("http://localhost:8080/api/product/" + product.id + "/batch", JSON.stringify(batch))
+        return $http.post("/api/product/" + product.id + "/batch", JSON.stringify(batch))
     }
 });

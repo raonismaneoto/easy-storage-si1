@@ -4,9 +4,6 @@ app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstan
 
     $scope.submit = function (product) {
 
-        //adicionar
-
-        console.log(product)
 
         mainService.updateProductById(product.id, product)
             .then(function success(response) {
@@ -19,7 +16,6 @@ app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstan
                     });
                 }
             }, function error(error) {
-                console.log(error);
                 toastr.error("Problemas ao tentar atribuir preço ao produto: " + product.id);
             });
 

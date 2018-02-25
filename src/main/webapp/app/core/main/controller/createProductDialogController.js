@@ -21,11 +21,9 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
                     viewModel.product = {};
-                    console.log(response)
                     $uibModalInstance.close(201);
                 }
             }, function error(error) {
-                console.log(error);
                 toastr.error("Problemas ao tentar adicionar produto.");
             });
     };

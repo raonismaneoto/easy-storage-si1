@@ -1,7 +1,4 @@
 app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService) {
-
-    var urlServer = "http://localhost:8080/api/";
-    // $scope.title = "Search Product";
     $scope.PRODUCT_UNAVAILABLE = "Em Falta"
     $scope.PRODUCT_AVAILABLE = "Disponivel"
     $scope.productsList = [];
@@ -23,7 +20,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             .then(function successCallback(response) {
                 $scope.productsList = response.data;
             }, function errorCallback(error) {
-                console.log(error);
             });
     };
 
@@ -97,7 +93,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
 
         modalInstance.result.then(function (result) {
-            console.log(result)
             if (result.status === 200) {
                 loadProductsList();
             }
@@ -105,18 +100,13 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     };
 
     $scope.searchProductById = function(id) {
-        // Falta implementar
-        console.log(id)
         mainService.getProductById(id)
             .then(function successCallback(response) {
                 $scope.productsList = [
                     response.data
                 ]
-                console.error("Não carregou")
             }, function errorCallback(error) {
-                console.error(error);
                 if (error.status === 404) {
-                    console.log(error.data.errorMessage);
                     toastr.error(error.data.errorMessage);
                 } else if (error.status === 400) {
                     toastr.error("Produto não encontrado");
@@ -139,7 +129,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
 
         modalInstance.result.then(function (result) {
-            console.log(result)
             if (result.status === 201) {
                 loadProductsList();
             }

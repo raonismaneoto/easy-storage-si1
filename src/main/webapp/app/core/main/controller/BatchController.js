@@ -16,8 +16,6 @@ app.controller("BatchController", function ($scope, $uibModalInstance, $http, to
     };
 
     $scope.submit = function (expirationDate, numberOfItems) {
-
-        //adicionar
         var batch = {
             expirationDate: expirationDate.getDay() + "/" + (expirationDate.getMonth() + 1) + expirationDate.getFullYear(),
             numberOfItens: numberOfItems
@@ -25,16 +23,13 @@ app.controller("BatchController", function ($scope, $uibModalInstance, $http, to
 
         mainService.createBatch(product, batch)
             .then(function success(response) {
-                console.log(response)
                 if (response.status === 201) {
-                    console.log("Lote criado com sucesso!");
                     toastr.success("Lote criado com sucesso!");
                     $uibModalInstance.close({
                         status: 201
                     });
                 }
             }, function error(error) {
-                console.log(error);
                 toastr.error("Problemas ao tentar adicionar produto.");
             });
     };
