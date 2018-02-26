@@ -6,7 +6,7 @@
     app.service("AuthService", function AuthService($http, $q) {
         var authService = this;
 
-        authService.user = {};
+        authService.user = new User();
 
         authService.getUser = function getUser(username, password) {
             var deffered = $q.defer();
@@ -46,6 +46,10 @@
                 deffered.reject(response.data);
             });
             return deffered.promise;
+        }
+
+        authService.isAdmin = function isAdmin() {
+            return authService.user.isAdmin();
         }
 
         function getLastUser() {

@@ -1,4 +1,7 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService, AuthService) {
+    
+    var productCtrl = this;
+    
     $scope.PRODUCT_UNAVAILABLE = "Em Falta"
     $scope.PRODUCT_AVAILABLE = "Disponivel"
     $scope.productsList = [];
@@ -133,6 +136,10 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }
         });
     };
+
+    productCtrl.isAdmin = function isAdmin() {
+        return AuthService.isAdmin();
+    }
 
 
     loadProductsList();
