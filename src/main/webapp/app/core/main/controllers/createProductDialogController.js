@@ -14,7 +14,7 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
         }
     ];
 
-    this.createProduct = function (product) {
+    viewModel.createProduct = function (product) {
 
         mainService.createProduct(product)
             .then(function success(response) {
@@ -28,7 +28,7 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
             });
     };
 
-    this.cancel = function () {
+    viewModel.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 });
