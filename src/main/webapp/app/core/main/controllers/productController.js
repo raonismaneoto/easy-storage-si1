@@ -22,7 +22,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }, function errorCallback(error) {
             });
     };
-/home/ignacio/workspace/emerson/easy-storage-si1/src/main/webapp/app/core/main/controllers/productController.js
     $scope.orderProductsBy = function (field) {
         $scope.criterion = field;
         $scope.orderDirection = !$scope.orderDirection;
