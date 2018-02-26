@@ -5,14 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public interface BatchService {
-
 	List<Batch> findAllBatchs();
-
-	Batch findById(long id);
-
-	void updateBatch(Batch batch);
-
-	void deleteBatchById(long id);
 
 	Batch saveBatch(Batch batch);
 }

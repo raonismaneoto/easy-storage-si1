@@ -8,13 +8,9 @@ public interface ProductService {
 
 	List<Product> findAllProducts();
 
-	Product findById(long id);
+	Product findProduct(String barCode);
+	
+	Product saveProduct(Product product);
 
-	void saveProduct(Product product);
-
-	void updateProduct(Product product);
-
-	void deleteProductById(long id);
-
-	boolean doesProductExists(Product product);
+	boolean productAlreadyExists(String barCode);
 }

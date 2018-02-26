@@ -1,10 +1,15 @@
 package com.ufcg.si1.dataBaseOperations;
-import com.ufcg.si1.repositories.ProductRepository;
-import com.ufcg.si1.repositories.UserRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.ufcg.si1.model.*;
+
+import com.ufcg.si1.model.Batch;
+import com.ufcg.si1.model.Product;
+import com.ufcg.si1.model.User;
+import com.ufcg.si1.repositories.BatchRepository;
+import com.ufcg.si1.repositories.ProductRepository;
+import com.ufcg.si1.repositories.UserRepository;
 
 @Component
 public class DataBaseOperations {
@@ -12,6 +17,9 @@ public class DataBaseOperations {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private BatchRepository batchRepository;
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -28,14 +36,29 @@ public class DataBaseOperations {
         return dataBaseOperations;
     }
 
+    //Database operations for Products
+    public List<Product> findAllProducts() {
+    	return productRepository.findAll();
+    }
+    
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public Product getProduct(String barCode) {
+    public Product findProduct(String barCode) {
         return productRepository.findOne(barCode);
     }
+    
+    //Database operations for Batchs
+    public List<Batch> findAllBatchs() {
+    	return batchRepository.findAll();
+    }
+    
+    public Batch saveBatch(Batch batch) {
+        return batchRepository.save(batch);
+    }
 
+    //Database operations for User
     public User getUser(String username) {
         return userRepository.findOne(username);
     }
