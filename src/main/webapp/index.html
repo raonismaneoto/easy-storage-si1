@@ -29,15 +29,23 @@
         <a class="navbar-brand" href="#!/">Estoque Facil</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div ng-controller="ProductCtrl" class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+      <div ng-controller="AuthController as authCtrl" 
+        class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+        <div ng-show="!authCtrl.isLogged()">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="" ng-click="authCtrl.openLoginDialog()">Logar</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="" ng-click="authCtrl.openRegisterDialog()">Registrar</a>
+              </li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav" ng-show="authCtrl.isLogged()">
           <li>
-            <a href="" ng-click="openLoginDialog()">Logar</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav">
-          <li>
-            <a href="" ng-click="openRegisterDialog()">Registrar</a>
+            <a href="" ng-click="authCtrl.logout()">Deslogar</a>
           </li>
         </ul>
       </div>
@@ -90,19 +98,29 @@
   <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 
 
   <!-- Application scripts: -->
   <script src="app/core/app.js"></script>
   <script src="app/core/app.routes.js"></script>
+<<<<<<< HEAD
 
   <script src="app/core/main/controller/productController.js"></script>
   <script src="app/core/main/controller/createProductDialogController.js"></script>
   <script src="app/core/main/controller/updateProductPriceDialogController.js"></script>
   <script src="app/core/main/controller/BatchController.js"></script>
   
+=======
+  <script src="app/core/main/services/authService.js"></script>
+  <script src="app/core/main/mainController.js"></script>
+>>>>>>> 42c348840f3239d5b15686d5e950f6d683ae6d16
   <script src="app/core/main/mainService.js"></script>
   <script src="app/common/constants/constants.js"></script>
+  <script src="app/core/main/controllers/authController.js"></script>
+  <script src="app/core/main/controllers/loginController.js"></script>
+  <script src="app/core/main/models/User.js"></script>
+
 
 </body>
 </html>
