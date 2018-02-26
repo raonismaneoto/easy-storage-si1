@@ -1,6 +1,6 @@
 app.controller("BatchController", function ($scope, $uibModalInstance, $http, toastr, product, mainService) {
 
-    $scope.produto = product;
+    $scope.product = product;
     $scope.dateformat = 'dd/MM/yyyy';
     $scope.datePicker = {
         opened : false

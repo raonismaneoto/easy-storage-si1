@@ -22,7 +22,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }, function errorCallback(error) {
             });
     };
-
+/home/ignacio/workspace/emerson/easy-storage-si1/src/main/webapp/app/core/main/controllers/productController.js
     $scope.orderProductsBy = function (field) {
         $scope.criterion = field;
         $scope.orderDirection = !$scope.orderDirection;
@@ -38,8 +38,8 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     }
 
     $scope.getProductStatus = function(product) { //Ver a lista da createProductDialogController
-        if (product.statusCode === 1 ) return  $scope.PRODUCT_UNAVAILABLE;
-        if (product.statusCode === 2 ) return  $scope.PRODUCT_AVAILABLE;
+        if (product.statusCode === 1 ) return  $scope.PRODUCT_AVAILABLE;
+        if (product.statusCode === 2 ) return  $scope.PRODUCT_UNAVAILABLE;
         
     }
 
@@ -47,7 +47,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Adicionar Produto',
             ariaDescribedBy: 'Formulario para adição de um novo produto',
-            templateUrl: 'app/core/main/view/createProductDialogView.html',
+            templateUrl: 'app/core/main/views/createProductDialogView.html',
             controller: 'CreateProductDialogCtrl',
             controllerAs: 'cpCtrl'
         });
@@ -63,7 +63,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Login',
             ariaDescribedBy: 'Formulário de Autenticação do Usuário',
-            templateUrl: 'app/core/main/view/loginView.html',
+            templateUrl: 'app/core/main/views/loginView.html',
             controller: '',
             controllerAs: ''
         });
@@ -73,7 +73,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Register',
             ariaDescribedBy: 'Formulário de Registo do Usuário',
-            templateUrl: 'app/core/main/view/registerView.html',
+            templateUrl: 'app/core/main/views/registerView.html',
             controller: '',
             controllerAs: ''
         });
@@ -83,7 +83,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço a Produto',
             ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
-            templateUrl: 'app/core/main/view/updateProductPriceDialogView.html',
+            templateUrl: 'app/core/main/views/updateProductPriceDialogView.html',
             controller: 'UpdateProductPriceDialogCtrl',
             resolve: {
                 product: function () {
@@ -119,7 +119,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Criar lote',
             ariaDescribedBy: 'Formulario para criar lote',
-            templateUrl: 'app/core/main/view/createBatchView.html',
+            templateUrl: 'app/core/main/views/createBatchView.html',
             controller: 'BatchController',
             resolve: {
                 product: function () {
