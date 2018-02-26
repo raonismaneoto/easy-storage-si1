@@ -5,15 +5,15 @@
     <form name="createProductForm">
         <div class="form-group">
         <label>Nome</label>
-        <input type="text" class="form-control" required ng-model=""/>
+        <input type="text" class="form-control" required ng-model="loginCtrl.username"/>
         </div>
         <div class="form-group">
         <label>Senha</label>
-        <input type="password" class="form-control" required ng-model=""/>
+        <input type="password" class="form-control" required ng-model="loginCtrl.password"/>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-disabled="" ng-click="">Entrar</button>
+    <button class="btn btn-primary" type="button" ng-click="loginCtrl.login()">Entrar</button>
 </div>
   
