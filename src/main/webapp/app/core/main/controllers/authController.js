@@ -10,7 +10,7 @@
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Login',
                 ariaDescribedBy: 'Formulário de Autenticação do Usuário',
-                templateUrl: 'app/core/main/loginView.html',
+                templateUrl: 'app/core/main/views/loginView.html',
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl'
             });
@@ -20,7 +20,7 @@
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Register',
                 ariaDescribedBy: 'Formulário de Registo do Usuário',
-                templateUrl: 'app/core/main/registerView.html',
+                templateUrl: 'app/core/main/views/registerView.html',
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl'
             });
