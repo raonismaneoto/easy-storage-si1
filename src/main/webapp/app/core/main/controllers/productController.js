@@ -2,7 +2,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     $scope.PRODUCT_UNAVAILABLE = "Em Falta"
     $scope.PRODUCT_AVAILABLE = "Disponivel"
     $scope.productsList = [];
-    $scope.produtos = []    ;
+    $scope.produtos = [];
     $scope.criteria = [
         {
             show: 'Nome',
