@@ -7,19 +7,15 @@
         var productService = this;
 
         productService.getAllProducts = function getAllProducts() {
-            return $http.get(BASE_SERVER_URL + "/product/")
+            return $http.get(BASE_SERVER_URL + "/product/findAll")
         }
 
-        productService.updateProductById = function updateProductById(id, data) {
-            return $http.put(BASE_SERVER_URL + "/product/" + id, data)
+        productService.updateProduct = function updateProduct(barCode, data) {
+            return $http.put(BASE_SERVER_URL + "/product/update/" + barCode, data)
         }
 
-        productService.getProductById = function getProductById(id) {
-            return $http.get("/api/product/" + id)
-        }
-        
         productService.createProduct = function createProduct(product) {
-            return $http.post("/api/product/", JSON.stringify(product))
+            return $http.post("/api/product/create", JSON.stringify(product))
         }
     })
 })();
