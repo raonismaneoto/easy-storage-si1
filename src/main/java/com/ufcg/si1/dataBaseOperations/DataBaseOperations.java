@@ -54,7 +54,7 @@ public class DataBaseOperations {
     }
     
     //Database operations for Batchs
-    public List<Batch> findAllBatchs() {
+    public List<Batch> findAllBatches() {
     	return batchRepository.findAll();
     }
     
