@@ -56,8 +56,8 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	 * Batch Operations
 	 */
 	@Override
-	public List<Batch> findAllBatchs() {
-		return dataBaseOperations.findAllBatchs();
+	public List<Batch> findAllBatches() {
+		return dataBaseOperations.findAllBatches();
 	}
 
 	@Override
@@ -69,5 +69,10 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 		}
 		batch.setProduct(product);
 		return dataBaseOperations.saveBatch(batch);
-	}	
+	}
+	
+	@Override
+	public List<Batch> getBatchesByProduct(Product product) {
+		return dataBaseOperations.getBatchesByProduct(product);
+	}
 }
