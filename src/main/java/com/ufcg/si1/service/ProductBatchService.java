@@ -28,4 +28,6 @@ public interface ProductBatchService {
 	List<Batch> findAllBatchs();
 
 	Batch saveBatch(Batch batch);
+
+	List<Batch> getBatchesByProduct(Product product);
 }

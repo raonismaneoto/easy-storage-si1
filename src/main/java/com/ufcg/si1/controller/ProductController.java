@@ -66,4 +66,15 @@ public class ProductController {
 		productBatchService.saveBatch(new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate()));
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
+
+	@RequestMapping(value="/batch/{barCode}", method = RequestMethod.GET)
+	public ResponseEntity<List<Batch>> getBatchesByProduct(@PathVariable("barCode") String barCode) {
+		Product product = productBatchService.findProductByBarCode(barCode);
+		if (product == null) {
+			return new ResponseEntity(new CustomErrorType("Unable to find batch. Product not found."),
+					HttpStatus.NOT_FOUND);
+		}
+		List<Batch> batches = productBatchService.getBatchesByProduct(product);
+		return new ResponseEntity<List<Batch>>(batches, HttpStatus.OK);
+	}
 }

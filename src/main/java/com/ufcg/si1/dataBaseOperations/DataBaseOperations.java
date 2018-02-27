@@ -62,6 +62,10 @@ public class DataBaseOperations {
         return batchRepository.save(batch);
     }
 
+    public List<Batch> getBatchesByProduct(Product product) {
+        return batchRepository.findByProduct(product);
+    }
+
     //Database operations for User
     public User getUser(String username) {
         return userRepository.findOne(username);
