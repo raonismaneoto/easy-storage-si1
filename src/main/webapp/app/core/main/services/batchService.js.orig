@@ -1,18 +1,8 @@
 <<<<<<< HEAD
 'use strict';
-
-(function () {
-    var app = angular.module("efApp");
-
-    app.service("BatchService", function BatchService($http, BASE_SERVER_URL, AuthService) {
-        var batchService = this;
-
-        batchService.createBatch = function createBatch(product, batch) {
-            return $http.post("/api/product/" + product.id + "/batch", JSON.stringify(batch))
-        }
-    })
 =======
 'use struct';
+>>>>>>> master
 
 (function () {
 	var app = angular.module("efApp");
@@ -22,13 +12,21 @@
 		
 		batchService.saveBatch = function saveBatch(product, batch) {
 			var deffered = $q.defer();
+<<<<<<< HEAD
+			$http.post('/api/product/batch/create/' + product.barCode, JSON.stringify(batch)).then(function success(response) {
+				deffered.resolve(response.data);
+			}, function error(response) {
+				deffered.reject(response.data);
+			});
+			return deffered.promise; 
+=======
             $http.post('/api/product/batch/create/' + product.barCode, JSON.stringify(batch)).then(function success(response) {
                 deffered.resolve(response.data);
             }, function error(response) {
                 deffered.reject(response.data);
             });
             return deffered.promise; 
+>>>>>>> master
 		}
 	});
->>>>>>> master
 })();
