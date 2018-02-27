@@ -1,4 +1,4 @@
-app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, ProductService) {
+app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, ProductService, AuthService) {
 
     var viewModel = this;
 
