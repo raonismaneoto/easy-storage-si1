@@ -3,9 +3,9 @@ package com.ufcg.si1.model.enumerations;
 import exceptions.NonExistentObjectException;
 
 public enum DiscountType {
-        NO_DISCOUNT(0.0),
+        NO_DISCOUNT(1.0),
         GOOD_DISCOUNT(0.9),
-        GREAT_DISCOUNT(0.25),
+        GREAT_DISCOUNT(0.75),
         SUPER_DISCOUNT(0.5);
 
         private final double discountMultiplier;
