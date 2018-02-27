@@ -1,4 +1,4 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, productService) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService) {
     $scope.PRODUCT_UNAVAILABLE = "Em Falta"
     $scope.PRODUCT_AVAILABLE = "Disponivel"
     $scope.productsList = [];
@@ -16,7 +16,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         }];
 
     var loadProductsList = function () {
-        productService.getAllProducts()
+        ProductService.getAllProducts()
             .then(function successCallback(response) {
                 $scope.productsList = response.data;
             }, function errorCallback(error) {
@@ -99,7 +99,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     };
 
     $scope.searchProductById = function(id) {
-        productService.getProductById(id)
+        ProductService.getProductById(id)
             .then(function successCallback(response) {
                 $scope.productsList = [
                     response.data

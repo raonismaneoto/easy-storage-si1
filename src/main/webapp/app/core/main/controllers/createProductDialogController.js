@@ -1,4 +1,4 @@
-app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, productService) {
+app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, ProductService) {
 
     var viewModel = this;
 
@@ -16,7 +16,7 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
 
     viewModel.createProduct = function (product) {
 
-        productService.createProduct(product)
+        ProductService.createProduct(product)
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");

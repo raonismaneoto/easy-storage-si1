@@ -1,25 +1,25 @@
-app.factory("productService", function ($http,BASE_SERVER_URL, AuthService) {
+'use strict';
 
-    return {
-        getAllProducts: _getAllProducts,
-        updateProductById: _updateProductById,
-        getProductById: _getProductById,
-        createProduct: _createProduct
-    };
-    
-    function _getAllProducts() {
-        return $http.get(BASE_SERVER_URL + "/product/")
-    }
+(function () {
+    var app = angular.module("efApp");
 
-    function _updateProductById(id, data) {
-        return $http.put(BASE_SERVER_URL + "/product/" + id, data)
-    }
+    app.service("ProductService", function ProductService($http, BASE_SERVER_URL, AuthService) {
+        var productService = this;
 
-    function _getProductById(id) {
-        return $http.get("/api/product/" + id)
-    }
-    
-    function _createProduct(product) {
-        return $http.post("/api/product/", JSON.stringify(product))
-    }
-});
+        productService.getAllProducts = function getAllProducts() {
+            return $http.get(BASE_SERVER_URL + "/product/")
+        }
+
+        productService.updateProductById = function updateProductById(id, data) {
+            return $http.put(BASE_SERVER_URL + "/product/" + id, data)
+        }
+
+        productService.getProductById = function getProductById(id) {
+            return $http.get("/api/product/" + id)
+        }
+        
+        productService.createProduct = function createProduct(product) {
+            return $http.post("/api/product/", JSON.stringify(product))
+        }
+    })
+})();
