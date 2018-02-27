@@ -1,10 +1,10 @@
 package exceptions;
 
-public class WrongPasswordException extends RuntimeException{
+public class InvalidObjectException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public WrongPasswordException(String errorMessage) {
+	public InvalidObjectException(String errorMessage) {
 		super("Data Exception: " + errorMessage);
 	}
 }

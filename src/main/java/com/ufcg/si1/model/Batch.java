@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Batch {
@@ -13,10 +13,10 @@ public class Batch {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToOne
+	@ManyToOne
 	private Product product;
 	
-	private int numberOfItens;
+	private int numberOfItems;
 	
 	private String expirationDate;
 
@@ -27,14 +27,14 @@ public class Batch {
 	public Batch(Product product, int numberOfItens, String expirationDate) {
 		super();
 		this.product = product;
-		this.numberOfItens = numberOfItens;
+		this.numberOfItems = numberOfItens;
 		this.expirationDate = expirationDate;
 	}
 
 	public Batch(long id, Product product, int numberOfItens, String expirationDate) {
 		this.id = id;
 		this.product = product;
-		this.numberOfItens = numberOfItens;
+		this.numberOfItems = numberOfItens;
 		this.expirationDate = expirationDate;
 	}
 
@@ -54,12 +54,12 @@ public class Batch {
 		this.product = product;
 	}
 
-	public int getNumberOfItens() {
-		return numberOfItens;
+	public int getNumberOfItems() {
+		return numberOfItems;
 	}
 
-	public void setNumberOfItens(int numberOfItens) {
-		this.numberOfItens = numberOfItens;
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
 	}
 
 	public String getExpirationDate() {
@@ -72,7 +72,7 @@ public class Batch {
 
 	@Override
 	public String toString() {
-		return "Batch{" + "id=" + id + ", product=" + product.toString() + ", numberOfItens=" + numberOfItens
+		return "Batch{" + "id=" + id + ", product=" + product.toString() + ", numberOfItens=" + numberOfItems
 				+ ", expirationDate='" + expirationDate + '\'' + '}';
 	}
 }

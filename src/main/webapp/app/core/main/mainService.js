@@ -4,7 +4,6 @@ app.factory("mainService", function ($http,BASE_SERVER_URL, AuthService) {
         getAllProducts: _getAllProducts,
         updateProduct: _updateProduct,
         createProduct: _createProduct,
-        createBatch: _createBatch
     };
     
     function _getAllProducts() {
@@ -17,9 +16,5 @@ app.factory("mainService", function ($http,BASE_SERVER_URL, AuthService) {
     
     function _createProduct(product) {
         return $http.post("/api/product/create", JSON.stringify(product))
-    }
-
-    function _createBatch(product, batch) {
-        return $http.post("/api/product/batch/create/" + product.barCode, JSON.stringify(batch))
     }
 });

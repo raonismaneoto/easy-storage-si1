@@ -49,6 +49,10 @@ public class DataBaseOperations {
         return productRepository.findOne(barCode);
     }
     
+    public void deleteProduct(String barCode) {
+    	productRepository.delete(barCode);
+    }
+    
     //Database operations for Batchs
     public List<Batch> findAllBatchs() {
     	return batchRepository.findAll();

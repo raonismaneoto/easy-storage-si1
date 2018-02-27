@@ -17,7 +17,7 @@ import com.ufcg.si1.service.UserService;
 import com.ufcg.si1.service.UserServiceImpl;
 
 import exceptions.NonExistentObjectException;
-import exceptions.ObjetoJaExistenteException;
+import exceptions.ObjectAlreadyExistsException;
 
 @RestController
 @RequestMapping("/api/user")
@@ -31,9 +31,9 @@ public class UserController {
 
     @RequestMapping(value="/create/client", method=RequestMethod.POST)
     public ResponseEntity<User> createClient(@RequestBody Client client, 
-        @RequestParam("username") String username) throws ObjetoJaExistenteException{
+        @RequestParam("username") String username) throws ObjectAlreadyExistsException{
         if(userService.userAlreadyExists(username)) {
-            throw new ObjetoJaExistenteException("The user already exists");
+            throw new ObjectAlreadyExistsException("The user already exists");
         }
         // This is due spring-boot and hibernate don't work as expected with heritage
         client.setProperties(username);
@@ -44,9 +44,9 @@ public class UserController {
 
     @RequestMapping(value="/create/admin", method=RequestMethod.POST)
     public ResponseEntity<User> createAdmin(@RequestBody Admin admin, 
-        @RequestParam("username") String username) throws ObjetoJaExistenteException{
+        @RequestParam("username") String username) throws ObjectAlreadyExistsException{
         if(userService.userAlreadyExists(username)) {
-            throw new ObjetoJaExistenteException("The user already exists");
+            throw new ObjectAlreadyExistsException("The user already exists");
         }
         // This is due spring-boot and hibernate don't work as expected with heritage
         admin.setProperties(username);

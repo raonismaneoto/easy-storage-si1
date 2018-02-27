@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.ufcg.si1.model.Batch;
 
 @Repository
-public interface BatchRepository extends JpaRepository<Batch, String> {
+public interface BatchRepository extends JpaRepository<Batch, Long> {
 }
