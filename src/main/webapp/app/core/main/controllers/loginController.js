@@ -12,7 +12,7 @@
                     AuthService.user = new User(response);
                     toastr.success("Login efetuado com sucesso");
                 }, function error(response) {
-                    toastr.success("Nome e/ou senha inválidos");
+                    toastr.error("Nome e/ou senha inválidos");
                 });
             }
             clearFields();
@@ -26,7 +26,7 @@
                     AuthService.user = new User(response);
                     toastr.success("Cadastro realizado com sucesso");
                 }, function error(response) {
-                    toastr.success("Não foi possível realizar o cadastro");
+                    toastr.error("Não foi possível realizar o cadastro");
                 });
             } else {
                 alert("As senhas não conferem");
@@ -42,7 +42,7 @@
                     AuthService.user = new User(response);
                     toastr.success("Cadastro realizado com sucesso");
                 }, function error(response) {
-                    toastr.success("Não foi possível realizar o cadastro");
+                    toastr.error("Não foi possível realizar o cadastro");
                 })
             } else {
                 toastr.error("As senhas não conferem.");
