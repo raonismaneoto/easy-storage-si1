@@ -1,4 +1,4 @@
-app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, mainService, toastr, product) {
+app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, ProductService, toastr, product) {
 
     var updateDialogCtrl = this;
 
@@ -6,8 +6,7 @@ app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, main
 
     updateDialogCtrl.submit = function (product) {
 
-
-        mainService.updateProduct(product.barCode, product)
+        ProductService.updateProduct(product.barCode, product)
             .then(function success(response) {
 
                 if (response.status === 200) {

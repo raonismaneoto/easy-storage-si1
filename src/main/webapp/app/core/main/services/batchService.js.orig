@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 'use strict';
+=======
+'use struct';
+>>>>>>> master
 
 (function () {
 	var app = angular.module("efApp");
@@ -8,12 +12,21 @@
 		
 		batchService.saveBatch = function saveBatch(product, batch) {
 			var deffered = $q.defer();
+<<<<<<< HEAD
 			$http.post('/api/product/batch/create/' + product.barCode, JSON.stringify(batch)).then(function success(response) {
 				deffered.resolve(response.data);
 			}, function error(response) {
 				deffered.reject(response.data);
 			});
 			return deffered.promise; 
+=======
+            $http.post('/api/product/batch/create/' + product.barCode, JSON.stringify(batch)).then(function success(response) {
+                deffered.resolve(response.data);
+            }, function error(response) {
+                deffered.reject(response.data);
+            });
+            return deffered.promise; 
+>>>>>>> master
 		}
 	});
 })();

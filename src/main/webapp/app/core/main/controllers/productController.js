@@ -1,4 +1,4 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService, AuthService) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService) {
     
     var productCtrl = this;
     productCtrl.PRODUCT_UNAVAILABLE = "Em Falta"
@@ -19,7 +19,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     ];
 
     var loadProductsList = function () {
-        mainService.getAllProducts()
+        ProductService.getAllProducts()
             .then(function successCallback(response) {
                 productCtrl.productsList = response.data;
             }, function errorCallback(error) {
@@ -84,7 +84,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     productCtrl.openAssignProductPriceDialog = function(product) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço a Produto',
-            ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
+            ariaDescribedBy: 'Formulario para Atribuir preço a Produto',
             templateUrl: 'app/core/main/views/updateProductPriceDialogView.html',
             controller: 'UpdateProductPriceDialogCtrl',
             controllerAs: 'updateDialogCtrl',
@@ -103,7 +103,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     };
 
     productCtrl.searchProductById = function(id) {
-        mainService.getProductById(id)
+        ProductService.getProductById(id)
             .then(function successCallback(response) {
                 productCtrl.productsList = [
                     response.data

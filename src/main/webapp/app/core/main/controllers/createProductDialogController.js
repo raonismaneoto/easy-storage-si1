@@ -1,5 +1,4 @@
-app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, 
-    mainService, AuthService) {
+app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, ProductService, AuthService) {
 
     var viewModel = this;
 
@@ -17,7 +16,7 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
 
     viewModel.createProduct = function (product) {
         if(AuthService.isAdmin()) {
-            mainService.createProduct(product)
+            ProductService.createProduct(product)
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
