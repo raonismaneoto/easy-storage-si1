@@ -7,7 +7,7 @@ app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, main
     updateDialogCtrl.submit = function (product) {
 
 
-        mainService.updateProductById(product.id, product)
+        mainService.updateProduct(product.barCode, product)
             .then(function success(response) {
 
                 if (response.status === 200) {

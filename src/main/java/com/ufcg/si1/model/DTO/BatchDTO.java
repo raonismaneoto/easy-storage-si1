@@ -2,23 +2,23 @@ package com.ufcg.si1.model.DTO;
 
 public class BatchDTO {
 
-    private int numberOfItens;
+    private int numberOfItems;
     private String expirationDate;
 
     public BatchDTO() {}
 
     public BatchDTO(int numberOfItens, String expirationDate) {
         super();
-        this.numberOfItens = numberOfItens;
+        this.numberOfItems = numberOfItens;
         this.expirationDate = expirationDate;
     }
 
-    public int getNumberOfItens() {
-        return numberOfItens;
+    public int getNumberOfItems() {
+        return numberOfItems;
     }
 
-    public void setNumberOfItens(int numberOfItens) {
-        this.numberOfItens = numberOfItens;
+    public void setNumberOfItems(int numberOfItems) {
+        this.numberOfItems = numberOfItems;
     }
 
     public String getExpirationDate() {

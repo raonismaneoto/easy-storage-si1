@@ -1,69 +1,78 @@
 package com.ufcg.si1.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Batch {
 
-    private long id;
-    private Product product;
-    private int numberOfItens;
-    private String expirationDate;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 
-    public Batch() {
-        this.id = 0;
-    }
+	@ManyToOne
+	private Product product;
+	
+	private int numberOfItems;
+	
+	private String expirationDate;
 
-    public Batch(Product product, int numberOfItens, String expirationDate) {
-        super();
-        this.product = product;
-        this.numberOfItens = numberOfItens;
-        this.expirationDate = expirationDate;
-    }
+	public Batch() {
+		this.id = 0;
+	}
 
-    public Batch(long id, Product product, int numberOfItens, String expirationDate) {
-        this.id = id;
-        this.product = product;
-        this.numberOfItens = numberOfItens;
-        this.expirationDate = expirationDate;
-    }
+	public Batch(Product product, int numberOfItens, String expirationDate) {
+		super();
+		this.product = product;
+		this.numberOfItems = numberOfItens;
+		this.expirationDate = expirationDate;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public Batch(long id, Product product, int numberOfItens, String expirationDate) {
+		this.id = id;
+		this.product = product;
+		this.numberOfItems = numberOfItens;
+		this.expirationDate = expirationDate;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public int getNumberOfItens() {
-        return numberOfItens;
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-    public void setNumberOfItens(int numberOfItens) {
-        this.numberOfItens = numberOfItens;
-    }
+	public int getNumberOfItems() {
+		return numberOfItems;
+	}
 
-    public String getExpirationDate() {
-        return expirationDate;
-    }
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
+	}
 
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
+	public String getExpirationDate() {
+		return expirationDate;
+	}
 
-    @Override
-    public String toString() {
-        return "Batch{" +
-                "id=" + id +
-                ", product=" + product.getId() +
-                ", numberOfItens=" + numberOfItens +
-                ", expirationDate='" + expirationDate + '\'' +
-                '}';
-    }
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Batch{" + "id=" + id + ", product=" + product.toString() + ", numberOfItens=" + numberOfItems
+				+ ", expirationDate='" + expirationDate + '\'' + '}';
+	}
 }

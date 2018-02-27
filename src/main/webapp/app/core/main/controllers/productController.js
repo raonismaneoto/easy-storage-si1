@@ -124,8 +124,7 @@ app.controller("ProductCtrl", function ($uibModal, $http, toastr,$location, main
             ariaLabelledBy: 'Criar lote',
             ariaDescribedBy: 'Formulario para criar lote',
             templateUrl: 'app/core/main/views/createBatchView.html',
-            controller: 'BatchController',
-            controllerAs: 'batchCtrl',
+            controller: 'BatchController as batchCtrl',
             resolve: {
                 product: function () {
                     return angular.copy(product);
