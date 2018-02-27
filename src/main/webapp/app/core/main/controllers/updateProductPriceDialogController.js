@@ -1,8 +1,10 @@
-app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstance, mainService, toastr, product) {
+app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, mainService, toastr, product) {
 
-    $scope.product = product;
+    var updateDialogCtrl = this;
 
-    $scope.submit = function (product) {
+    updateDialogCtrl.product = product;
+
+    updateDialogCtrl.submit = function (product) {
 
 
         mainService.updateProduct(product.barCode, product)
@@ -21,7 +23,7 @@ app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstan
 
     };
 
-    $scope.cancel = function () {
+    updateDialogCtrl.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 });
