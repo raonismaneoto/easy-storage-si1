@@ -1,22 +1,24 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.User;
-import com.ufcg.si1.service.UserService;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import exceptions.NonExistentObjectException;
-import exceptions.ObjetoInvalidoException;
-import exceptions.WrongPasswordException;
 import com.ufcg.si1.dataBaseOperations.DataBaseOperations;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ufcg.si1.model.User;
+
+import exceptions.NonExistentObjectException;
+import exceptions.WrongPasswordException;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private DataBaseOperations dataBaseOperations;
-
+    
+    public User saveUser(User user) {
+    	return dataBaseOperations.saveUser(user);
+    }
+    
     public boolean userAlreadyExists(String username) {
         User userResult = dataBaseOperations.getUser(username);
         return userResult != null;

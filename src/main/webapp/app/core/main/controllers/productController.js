@@ -1,12 +1,11 @@
 app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService, AuthService) {
     
     var productCtrl = this;
-    
-    $scope.PRODUCT_UNAVAILABLE = "Em Falta"
-    $scope.PRODUCT_AVAILABLE = "Disponivel"
-    $scope.productsList = [];
-    $scope.produtos = [];
-    $scope.criteria = [
+    productCtrl.PRODUCT_UNAVAILABLE = "Em Falta"
+    productCtrl.PRODUCT_AVAILABLE = "Disponivel"
+    productCtrl.productsList = [];
+    productCtrl.produtos = [];
+    productCtrl.criteria = [
         {
             show: 'Nome',
             attribute: 'name'
@@ -16,21 +15,22 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         }, {
             show: 'Categoria',
             attribute: 'category'
-        }];
+        }
+    ];
 
     var loadProductsList = function () {
         mainService.getAllProducts()
             .then(function successCallback(response) {
-                $scope.productsList = response.data;
+                productCtrl.productsList = response.data;
             }, function errorCallback(error) {
             });
     };
-    $scope.orderProductsBy = function (field) {
-        $scope.criterion = field;
-        $scope.orderDirection = !$scope.orderDirection;
+    productCtrl.orderProductsBy = function (field) {
+        productCtrl.criterion = field;
+        productCtrl.orderDirection = !productCtrl.orderDirection;
     };
 
-    $scope.getProductPrice = function(product) {
+    productCtrl.getProductPrice = function(product) {
         var price = 0.0
         if (product.price) {
             price = product.price;
@@ -39,13 +39,13 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         return priceString;
     }
 
-    $scope.getProductStatus = function(product) { //Ver a lista da createProductDialogController
-        if (product.statusCode === 1 ) return  $scope.PRODUCT_AVAILABLE;
-        if (product.statusCode === 2 ) return  $scope.PRODUCT_UNAVAILABLE;
+    productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
+        if (product.statusCode === 1 ) return  productCtrl.PRODUCT_AVAILABLE;
+        if (product.statusCode === 2 ) return  productCtrl.PRODUCT_UNAVAILABLE;
         
     }
 
-    $scope.openCreateProductDialog = function() {
+    productCtrl.openCreateProductDialog = function() {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Adicionar Produto',
             ariaDescribedBy: 'Formulario para adição de um novo produto',
@@ -61,7 +61,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    $scope.openLoginDialog = function() {
+    productCtrl.openLoginDialog = function() {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Login',
             ariaDescribedBy: 'Formulário de Autenticação do Usuário',
@@ -71,7 +71,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    $scope.openRegisterDialog = function() {
+    productCtrl.openRegisterDialog = function() {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Register',
             ariaDescribedBy: 'Formulário de Registo do Usuário',
@@ -81,12 +81,13 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    $scope.openAssignProductPriceDialog = function(product) {
+    productCtrl.openAssignProductPriceDialog = function(product) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço a Produto',
             ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
             templateUrl: 'app/core/main/views/updateProductPriceDialogView.html',
             controller: 'UpdateProductPriceDialogCtrl',
+            controllerAs: 'updateDialogCtrl',
             resolve: {
                 product: function () {
                     return angular.copy(product);
@@ -101,10 +102,10 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    $scope.searchProductById = function(id) {
+    productCtrl.searchProductById = function(id) {
         mainService.getProductById(id)
             .then(function successCallback(response) {
-                $scope.productsList = [
+                productCtrl.productsList = [
                     response.data
                 ]
             }, function errorCallback(error) {
@@ -116,13 +117,13 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             });
     };
 
-    $scope.openCreateBatchDialog = function(product) {
+    productCtrl.openCreateBatchDialog = function(product) {
 
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Criar lote',
             ariaDescribedBy: 'Formulario para criar lote',
             templateUrl: 'app/core/main/views/createBatchView.html',
-            controller: 'BatchController',
+            controller: 'BatchController as batchCtrl',
             resolve: {
                 product: function () {
                     return angular.copy(product);

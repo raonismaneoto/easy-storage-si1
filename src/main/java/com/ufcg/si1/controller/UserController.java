@@ -1,25 +1,23 @@
 package com.ufcg.si1.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import com.ufcg.si1.dataBaseOperations.DataBaseOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import exceptions.ObjetoJaExistenteException;
-import exceptions.NonExistentObjectException;
-
+import com.ufcg.si1.model.Admin;
+import com.ufcg.si1.model.Client;
 import com.ufcg.si1.model.User;
 import com.ufcg.si1.service.UserService;
 import com.ufcg.si1.service.UserServiceImpl;
-import com.ufcg.si1.model.Client;
-import com.ufcg.si1.model.Admin;
+
+import exceptions.NonExistentObjectException;
+import exceptions.ObjectAlreadyExistsException;
 
 @RestController
 @RequestMapping("/api/user")
@@ -27,34 +25,32 @@ import com.ufcg.si1.model.Admin;
 public class UserController {
 
     @Autowired
-    private DataBaseOperations dataBaseOperations;
-    @Autowired
     private UserService userService = new UserServiceImpl();
 
     private User lastUser = new Client();
 
     @RequestMapping(value="/create/client", method=RequestMethod.POST)
     public ResponseEntity<User> createClient(@RequestBody Client client, 
-        @RequestParam("username") String username) throws ObjetoJaExistenteException{
+        @RequestParam("username") String username) throws ObjectAlreadyExistsException{
         if(userService.userAlreadyExists(username)) {
-            throw new ObjetoJaExistenteException("The user already exists");
+            throw new ObjectAlreadyExistsException("The user already exists");
         }
         // This is due spring-boot and hibernate don't work as expected with heritage
         client.setProperties(username);
-        User userToReturn = dataBaseOperations.saveUser(client);
+        User userToReturn = userService.saveUser(client);
         this.lastUser = userToReturn;
         return new ResponseEntity<User>(userToReturn, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/create/admin", method=RequestMethod.POST)
     public ResponseEntity<User> createAdmin(@RequestBody Admin admin, 
-        @RequestParam("username") String username) throws ObjetoJaExistenteException{
+        @RequestParam("username") String username) throws ObjectAlreadyExistsException{
         if(userService.userAlreadyExists(username)) {
-            throw new ObjetoJaExistenteException("The user already exists");
+            throw new ObjectAlreadyExistsException("The user already exists");
         }
         // This is due spring-boot and hibernate don't work as expected with heritage
         admin.setProperties(username);
-        User userToReturn = dataBaseOperations.saveUser(admin);
+        User userToReturn = userService.saveUser(admin);
         this.lastUser = userToReturn;
         return new ResponseEntity<User>(userToReturn, HttpStatus.CREATED);
     }

@@ -1,11 +1,13 @@
-app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstance, mainService, toastr, product) {
+app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, mainService, toastr, product) {
 
-    $scope.product = product;
+    var updateDialogCtrl = this;
 
-    $scope.submit = function (product) {
+    updateDialogCtrl.product = product;
+
+    updateDialogCtrl.submit = function (product) {
 
 
-        mainService.updateProductById(product.id, product)
+        mainService.updateProduct(product.barCode, product)
             .then(function success(response) {
 
                 if (response.status === 200) {
@@ -21,7 +23,7 @@ app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstan
 
     };
 
-    $scope.cancel = function () {
+    updateDialogCtrl.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 });
