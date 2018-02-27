@@ -3,7 +3,7 @@
 (function () {
     var app = angular.module("efApp");
 
-    app.controller("AuthController", function AuthController ($uibModal, AuthService) {
+    app.controller("AuthController", function AuthController ($uibModal, AuthService, toastr) {
         var authCtrl = this;
 
         authCtrl.openLoginDialog = function openLoginDialog() {
@@ -35,8 +35,8 @@
 
         authCtrl.logout = function logout() {
             AuthService.logout().then(function success(response) {
-                AuthService.user = {};
-                alert("Logout efetuado com sucesso.");
+                AuthService.user = new User();
+                toastr.success("Logout efetuado com sucesso.");
             });
         }
     });

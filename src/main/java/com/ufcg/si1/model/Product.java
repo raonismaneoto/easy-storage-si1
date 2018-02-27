@@ -1,23 +1,21 @@
 package com.ufcg.si1.model;
 
 import java.math.BigDecimal;
-import com.ufcg.si1.model.enumerations.Status;
 
-import exceptions.NonExistentObjectException;
-import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import com.ufcg.si1.model.enumerations.Status;
 
 @Entity
 public class Product {
 
-	private long id;
-
+	@Id
+	private String barCode;
+	
 	private String name;
 
 	private BigDecimal price;
-
-	@Id
-	private String barCode;
 
 	private String producer;
 
@@ -26,27 +24,17 @@ public class Product {
 	public Status status; 
 
 	public Product() {
-		this.id = 0;
 		this.price = new BigDecimal(0);
 	}
 
 	public Product(long id, String name, String barCode, String producer,
 			String categoryName) {
-		this.id = id;
 		this.name = name;
 		this.price = new BigDecimal(0);
 		this.barCode = barCode;
 		this.producer = producer;
 		this.category = categoryName;
 		this.status = Status.UNAVAILABLE;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getName() {

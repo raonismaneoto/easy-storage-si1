@@ -1,4 +1,12 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService) {
+<<<<<<< HEAD
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService) {
+    $scope.PRODUCT_UNAVAILABLE = "Em Falta"
+    $scope.PRODUCT_AVAILABLE = "Disponivel"
+    $scope.productsList = [];
+    $scope.produtos = [];
+    $scope.criteria = [
+=======
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, mainService, AuthService) {
     
     var productCtrl = this;
     productCtrl.PRODUCT_UNAVAILABLE = "Em Falta"
@@ -6,6 +14,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     productCtrl.productsList = [];
     productCtrl.produtos = [];
     productCtrl.criteria = [
+>>>>>>> master
         {
             show: 'Nome',
             attribute: 'name'
@@ -102,8 +111,13 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    productCtrl.searchProductById = function(id) {
+<<<<<<< HEAD
+    $scope.searchProductById = function(id) {
         ProductService.getProductById(id)
+=======
+    productCtrl.searchProductById = function(id) {
+        mainService.getProductById(id)
+>>>>>>> master
             .then(function successCallback(response) {
                 productCtrl.productsList = [
                     response.data

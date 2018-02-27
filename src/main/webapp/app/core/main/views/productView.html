@@ -4,8 +4,8 @@
       <div class="panel-heading c-list">
         <span class="title">Produtos</span>
         <ul class="pull-right c-controls">
-          <li>
-            <a class="btn btn-success" ng-click="openCreateProductDialog()">Adicionar Produto</a>
+          <li ng-if="productCtrl.isAdmin()">
+            <a class="btn btn-success" ng-click="productCtrl.openCreateProductDialog()">Adicionar Produto</a>
           </li>
         </ul>
       </div>
@@ -15,25 +15,25 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group c-search">
-            <input type="text" class="form-control" ng-model="searchCriteria" id="product-list-search" placeholder="Procurar por...">
+            <input type="text" class="form-control" ng-model="productCtrl.searchCriteria" id="product-list-search" placeholder="Procurar por...">
           </div>
         </div>
       </div>
           
-      <div class="dropdown">
+      <div class="dropdown" ng-if="productCtrl.isAdmin()">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar por
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li ng-repeat="orderingCriterion in criteria">
-            <a ng-click="orderProductsBy(orderingCriterion.attribute)">{{orderingCriterion.show}}</a>
+          <li ng-repeat="orderingCriterion in productCtrl.criteria">
+            <a ng-click="productCtrl.orderProductsBy(orderingCriterion.attribute)">{{orderingCriterion.show}}</a>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="flex-row row">
-      <div class="col-xs-6 col-sm-5 col-lg-4" ng-repeat="product in productsList | orderBy:criterion:!orderDirection | filter:searchCriteria">
+      <div class="col-xs-6 col-sm-5 col-lg-4" ng-repeat="product in productCtrl.productsList | orderBy:productCtrl.criterion:!productCtrl.orderDirection | filter:productCtrl.searchCriteria">
         <div class="thumbnail">
           <div class="caption">
             <h4 id="product-name">
@@ -41,12 +41,12 @@
             </h4>
             <h5 id="product-price">
               <div>
-                R$ {{getProductPrice(product)}}
+                R$ {{productCtrl.getProductPrice(product)}}
               </div>
             </h5>
             <h5 id="product-situation">
               <div>
-                {{getProductStatus(product)}}
+                {{productCtrl.getProductStatus(product)}}
               </div>
             </h5>
             <div class="btn-group" uib-dropdown>
@@ -54,8 +54,8 @@
                 <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                <li role="menuitem"><a ng-click="openAssignProductPriceDialog(product)">Atribuir preço</a></li>
-                <li role="menuitem"><a ng-click="openCreateBatchDialog(product)">Criar lote</a></li>
+                <li role="menuitem"><a ng-click="productCtrl.openAssignProductPriceDialog(product)">Atribuir preço</a></li>
+                <li role="menuitem"><a ng-click="productCtrl.openCreateBatchDialog(product)">Criar lote</a></li>
               </ul>
             </div>
 
