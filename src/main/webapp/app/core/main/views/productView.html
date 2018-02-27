@@ -4,7 +4,7 @@
       <div class="panel-heading c-list">
         <span class="title">Produtos</span>
         <ul class="pull-right c-controls">
-          <li>
+          <li ng-if="productCtrl.isAdmin()">
             <a class="btn btn-success" ng-click="productCtrl.openCreateProductDialog()">Adicionar Produto</a>
           </li>
         </ul>
@@ -20,7 +20,7 @@
         </div>
       </div>
           
-      <div class="dropdown">
+      <div class="dropdown" ng-if="productCtrl.isAdmin()">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ordenar por
           <span class="caret"></span>
         </button>

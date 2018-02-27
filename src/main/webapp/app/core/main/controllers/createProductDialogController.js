@@ -1,4 +1,5 @@
-app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, mainService) {
+app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, 
+    mainService, AuthService) {
 
     var viewModel = this;
 
@@ -15,8 +16,8 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
     ];
 
     viewModel.createProduct = function (product) {
-
-        mainService.createProduct(product)
+        if(AuthService.isAdmin()) {
+            mainService.createProduct(product)
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Produto adicionado com sucesso!");
@@ -26,6 +27,9 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
             }, function error(error) {
                 toastr.error("Problemas ao tentar adicionar produto.");
             });
+        } else {
+            toastr('Função destinada apenas a administradores.');
+        }
     };
 
     viewModel.cancel = function () {
