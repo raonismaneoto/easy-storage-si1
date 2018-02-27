@@ -88,6 +88,7 @@ app.controller("ProductCtrl", function ($uibModal, $http, toastr,$location, main
             ariaDescribedBy: 'Formulario para Atribuir preço á Produto',
             templateUrl: 'app/core/main/views/updateProductPriceDialogView.html',
             controller: 'UpdateProductPriceDialogCtrl',
+            controllerAs: 'updateDialogCtrl',
             resolve: {
                 product: function () {
                     return angular.copy(product);
