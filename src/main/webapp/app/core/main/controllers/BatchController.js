@@ -1,21 +1,23 @@
-app.controller("BatchController", function ($scope, $uibModalInstance, $http, toastr, product, mainService) {
+app.controller("BatchController", function ($uibModalInstance, $http, toastr, product, mainService) {
 
-    $scope.product = product;
-    $scope.dateformat = 'dd/MM/yyyy';
-    $scope.datePicker = {
+    var batchCtrl = this;
+
+    batchCtrl.product = product;
+    batchCtrl.dateformat = 'dd/MM/yyyy';
+    batchCtrl.datePicker = {
         opened : false
     };
 
-    $scope.expirationDate = new Date();
-    $scope.numberOfItens = 0;
+    batchCtrl.expirationDate = new Date();
+    batchCtrl.numberOfItens = 0;
 
-    $scope.dateOptions = {
+    batchCtrl.dateOptions = {
         formatYear: 'yy',
         minDate: new Date(),
         startingDay: 1
     };
 
-    $scope.submit = function (expirationDate, numberOfItems) {
+    batchCtrl.submit = function (expirationDate, numberOfItems) {
         var batch = {
             expirationDate: expirationDate.getDay() + "/" + (expirationDate.getMonth() + 1) + expirationDate.getFullYear(),
             numberOfItens: numberOfItems
@@ -34,11 +36,11 @@ app.controller("BatchController", function ($scope, $uibModalInstance, $http, to
             });
     };
 
-    $scope.cancel = function () {
+    batchCtrl.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.openDatePicker = function () {
-        $scope.datePicker.opened = true;
+    batchCtrl.openDatePicker = function () {
+        batchCtrl.datePicker.opened = true;
     }
 });
