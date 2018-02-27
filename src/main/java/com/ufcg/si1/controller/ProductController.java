@@ -25,7 +25,7 @@ import com.ufcg.si1.util.CustomErrorType;
 @RequestMapping("/api/product")
 @CrossOrigin
 public class ProductController {
-	
+
 	@Autowired
 	ProductBatchService productBatchService = new ProductBatchServiceImpl();
 
@@ -57,13 +57,13 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/batch/create/{barCode}", method = RequestMethod.POST)
-	public ResponseEntity<Batch> createBatch(@PathVariable("barCode") String barCode, @RequestBody BatchDTO batchDTO) {
+	public ResponseEntity<BatchDTO> createBatch(@PathVariable("barCode") String barCode, @RequestBody BatchDTO batchDTO) {
 		Product product = productBatchService.findProductByBarCode(barCode);
 		if (product == null) {
 			return new ResponseEntity(new CustomErrorType("Unable to create batch. Product not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		Batch batch = productBatchService.saveBatch(new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate()));
-		return new ResponseEntity<Batch>(batch, HttpStatus.CREATED);
+		productBatchService.saveBatch(new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate()));
+		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
 }
