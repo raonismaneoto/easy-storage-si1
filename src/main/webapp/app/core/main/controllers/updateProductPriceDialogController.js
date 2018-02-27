@@ -1,11 +1,11 @@
-app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstance, mainService, toastr, product) {
+app.controller("UpdateProductPriceDialogCtrl", function ($scope, $uibModalInstance, productService, toastr, product) {
 
     $scope.product = product;
 
     $scope.submit = function (product) {
 
 
-        mainService.updateProductById(product.id, product)
+        productService.updateProductById(product.id, product)
             .then(function success(response) {
 
                 if (response.status === 200) {

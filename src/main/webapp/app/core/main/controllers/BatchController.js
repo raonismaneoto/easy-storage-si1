@@ -1,4 +1,4 @@
-app.controller("BatchController", function ($scope, $uibModalInstance, $http, toastr, product, mainService) {
+app.controller("BatchController", function ($scope, $uibModalInstance, $http, toastr, product, batchService) {
 
     $scope.product = product;
     $scope.dateformat = 'dd/MM/yyyy';
@@ -21,7 +21,7 @@ app.controller("BatchController", function ($scope, $uibModalInstance, $http, to
             numberOfItens: numberOfItems
         }
 
-        mainService.createBatch(product, batch)
+        batchService.createBatch(product, batch)
             .then(function success(response) {
                 if (response.status === 201) {
                     toastr.success("Lote criado com sucesso!");
