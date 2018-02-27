@@ -81,6 +81,21 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
+    productCtrl.openReportSupermarketDialog = function(products) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'Relatório',
+            ariaDescribedBy: 'Relatório Geral do Supermercado',
+            templateUrl: 'app/core/main/views/reportSupermarketDialogView.html',
+            controller: 'ReportSupermarketDialogCtrl',
+            controllerAs: 'reportDialogCtrl',
+            resolve: {
+                products: function () {
+                    return angular.copy(products);
+                }
+            }
+        });
+    };
+
     productCtrl.openAssignProductPriceDialog = function(product) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço a Produto',
