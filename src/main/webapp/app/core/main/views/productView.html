@@ -32,7 +32,7 @@
           </ul>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2" ng-if="productCtrl.isAdmin()">
           <button class="btn btn-primary" type="button" ng-click="productCtrl.openReportSupermarketDialog(productCtrl.productsList)">Gerar Relatório</button>
         </div>
       </div>
@@ -55,7 +55,7 @@
                 {{productCtrl.getProductStatus(product)}}
               </div>
             </h5>
-            <div class="btn-group" uib-dropdown>
+            <div class="btn-group" uib-dropdown ng-if="productCtrl.isAdmin()">
               <button id="single-button" type="button" class="btn btn-default pull-right" uib-dropdown-toggle>
                 <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
               </button>

@@ -43,7 +43,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
         if (product.statusCode === 1 ) return  productCtrl.PRODUCT_AVAILABLE;
         if (product.statusCode === 2 ) return  productCtrl.PRODUCT_UNAVAILABLE;
-        
     }
 
     productCtrl.openCreateProductDialog = function() {
