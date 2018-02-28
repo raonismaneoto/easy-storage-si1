@@ -1,8 +1,26 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">Relatório Geral</h3>
+    <h3 class="modal-title" id="modal-title">Relatório Geral do Estoque de Produtos</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    
+    <div class="panel-group" id="accordion">
+	 	<div class="panel panel-default" ng-repeat="product in reportDialogCtrl.products">
+	    	<div class="panel-heading">
+	      		<h4 class="panel-title">
+	        		<a data-toggle="collapse" data-parent="#accordion" ng-click="reportDialogCtrl.invertFlagCollapse(product.barCode)">
+	        			{{product.name}}
+	        		</a>
+	      		</h4>
+	    	</div>
+	    	<div class="panel-collapse collapse in" ng-if="reportDialogCtrl.getFlagCollapse(product.barCode)">
+	    		<div class="panel-body">
+	    			Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+	    			sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+	      			minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+	      			commodo consequat.
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-danger" type="button" ng-click="reportDialogCtrl.close()">Fechar</button>

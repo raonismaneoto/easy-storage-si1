@@ -25,6 +25,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }, function errorCallback(error) {
             });
     };
+    
     productCtrl.orderProductsBy = function (field) {
         productCtrl.criterion = field;
         productCtrl.orderDirection = !productCtrl.orderDirection;
