@@ -7,16 +7,15 @@
 	</div>
 </div>
 <div class="modal-body" id="modal-body">
+	<h4>Produtos:</h4>
     <div class="panel-group" id="accordion">
 	 	<div class="panel panel-default" ng-repeat="product in reportDialogCtrl.products">
 	    	<div class="panel-heading">
 	      		<h4 class="panel-title font-weight-bold">
-	        		<a data-toggle="collapse" data-parent="#accordion" ng-click="reportDialogCtrl.invertFlagCollapse(product.barCode)">
-	        			{{product.name}}
-	        		</a>
+	        		<a data-toggle="collapse" data-parent="#accordion" ng-click="reportDialogCtrl.invertFlagCollapse(product.barCode)">{{product.name}}</a>
 	      		</h4>
 	    	</div>
-	    	<div class="panel-collapse collapse in " ng-if="reportDialogCtrl.getFlagCollapse(product.barCode)">
+	    	<div class="panel-collapse collapse in " ng-if="reportDialogCtrl.flagCollapse[product.barCode]">
 	    		<div class="panel-body" ng-repeat="batch in reportDialogCtrl.productBatches[product.barCode]">
 	    			<p>N° itens: {{batch.numberOfItems}}</p>
 	    			Data de Validade: {{batch.expirationDate}}

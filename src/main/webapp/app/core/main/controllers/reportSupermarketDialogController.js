@@ -12,33 +12,13 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
 
     reportDialogCtrl.insertFlagCollapse = function () {
     	reportDialogCtrl.products.forEach(function (product) {
-    		var obj = new Object();
-    		obj.key = product.barCode;
-    		obj.value = false;
-            obj.batches = reportDialogCtrl.getBatches(product.barCode);
-    		reportDialogCtrl.flagCollapse.push(obj);
+            reportDialogCtrl.flagCollapse[product.barCode] = false;
     	});
     };
 
     reportDialogCtrl.invertFlagCollapse = function (barCode) {
-        var aux;
-    	for (var i = reportDialogCtrl.flagCollapse.length - 1; i >= 0; i--) {
-            aux = reportDialogCtrl.flagCollapse[i];
-    		if (aux.key === barCode) {
-    			aux.value = !aux.value;
-    			break;
-    		}
-    	}
-        if (aux.value) reportDialogCtrl.getBatches(barCode);
-    };
-
-    reportDialogCtrl.getFlagCollapse = function (barCode) {
-    	for (var i = reportDialogCtrl.flagCollapse.length - 1; i >= 0; i--) {
-    		if (reportDialogCtrl.flagCollapse[i].key === barCode) {
-    			return reportDialogCtrl.flagCollapse[i].value;
-    			break;
-    		}
-    	}
+        reportDialogCtrl.flagCollapse[barCode] = !reportDialogCtrl.flagCollapse[barCode];
+        if (reportDialogCtrl.flagCollapse[barCode]) reportDialogCtrl.getBatches(barCode);
     };
 
     reportDialogCtrl.getBatches = function (barCode) {
@@ -47,15 +27,6 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
                 reportDialogCtrl.productBatches[barCode] = response;
             }, function errorCallback(error) {
         });
-    };
-
-    reportDialogCtrl.getBatchesFlagCollapse = function (barCode) {
-        for (var i = reportDialogCtrl.flagCollapse.length - 1; i >= 0; i--) {
-            if (reportDialogCtrl.flagCollapse[i].key === barCode) {
-                return reportDialogCtrl.flagCollapse[i].batches;
-                break;
-            }
-        }
     };
 
     reportDialogCtrl.insertFlagCollapse();

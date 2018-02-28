@@ -118,21 +118,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
-    productCtrl.searchProductById = function(id) {
-        ProductService.getProductById(id)
-            .then(function successCallback(response) {
-                productCtrl.productsList = [
-                    response.data
-                ]
-            }, function errorCallback(error) {
-                if (error.status === 404) {
-                    toastr.error(error.data.errorMessage);
-                } else if (error.status === 400) {
-                    toastr.error("Produto não encontrado");
-                }
-            });
-    };
-
     productCtrl.openCreateBatchDialog = function(product) {
 
         var modalInstance = $uibModal.open({
