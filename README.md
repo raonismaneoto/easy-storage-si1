@@ -11,6 +11,7 @@ Para a instalação das dependências do AngularJS execute no terminal o seguint
 ```
 npm install
 ```
+go
 Para mais informações da estrutura do AngularJS acesse o README na pasta **src/main/webapp**
  
 
