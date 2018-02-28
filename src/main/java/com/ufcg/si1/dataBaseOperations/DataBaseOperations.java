@@ -54,12 +54,16 @@ public class DataBaseOperations {
     }
     
     //Database operations for Batchs
-    public List<Batch> findAllBatchs() {
+    public List<Batch> findAllBatches() {
     	return batchRepository.findAll();
     }
     
     public Batch saveBatch(Batch batch) {
         return batchRepository.save(batch);
+    }
+
+    public List<Batch> getBatchesByProduct(Product product) {
+        return batchRepository.findByProduct(product);
     }
 
     //Database operations for User

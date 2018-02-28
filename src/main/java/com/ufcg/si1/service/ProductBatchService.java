@@ -25,7 +25,9 @@ public interface ProductBatchService {
 	/*
 	 * Batch Operations
 	 */
-	List<Batch> findAllBatchs();
+	List<Batch> findAllBatches();
 
 	Batch saveBatch(Batch batch);
+
+	List<Batch> getBatchesByProduct(Product product);
 }
