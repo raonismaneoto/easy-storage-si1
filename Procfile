@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/easy-storage.war
+web: java -Dserver.port=$PORT -jar target/EstoqueFacil-Si1.war
