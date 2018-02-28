@@ -20,21 +20,21 @@
         </div>
       </div>
           
-      <div class="dropdown" ng-if="productCtrl.isAdmin()">
-        <button class="btn btn-primary" type="button" data-toggle="dropdown">Ordenar por
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li ng-repeat="orderingCriterion in productCtrl.criteria">
-            <a ng-click="productCtrl.orderProductsBy(orderingCriterion.attribute)">{{orderingCriterion.show}}</a>
-          </li>
-        </ul>
-      </div>
+      <div class="row">    
+        <div class="dropdown col-md-2" ng-if="productCtrl.isAdmin()">
+          <button class="btn btn-primary" type="button" data-toggle="dropdown">Ordenar por
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="orderingCriterion in productCtrl.criteria">
+              <a ng-click="productCtrl.orderProductsBy(orderingCriterion.attribute)">{{orderingCriterion.show}}</a>
+            </li>
+          </ul>
+        </div>
 
-      <br>
-
-      <div>
-        <button class="btn btn-primary" type="button" ng-click="productCtrl.openReportSupermarketDialog(productCtrl.productsList)">Gerar Relatório</button>
+        <div class="col-md-2">
+          <button class="btn btn-primary" type="button" ng-click="productCtrl.openReportSupermarketDialog(productCtrl.productsList)">Gerar Relatório</button>
+        </div>
       </div>
     </div>
 

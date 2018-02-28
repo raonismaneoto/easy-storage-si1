@@ -7,7 +7,7 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
     reportDialogCtrl.productBatches = [];
 
     reportDialogCtrl.close = function () {
-        $uibModalInstance.dismiss('close');
+        $uibModalInstance.close('close');
     };
 
     reportDialogCtrl.insertFlagCollapse = function () {
