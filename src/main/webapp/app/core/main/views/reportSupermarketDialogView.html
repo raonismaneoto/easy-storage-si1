@@ -12,11 +12,9 @@
 	      		</h4>
 	    	</div>
 	    	<div class="panel-collapse collapse in" ng-if="reportDialogCtrl.getFlagCollapse(product.barCode)">
-	    		<div class="panel-body">
-	    			Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-	    			sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-	      			minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-	      			commodo consequat.
+	    		<div class="panel-body" ng-repeat="batch in reportDialogCtrl.productBatches[product.barCode]">
+	    			{{batch.numberOfItems}}
+	    			{{batch.expirationDate}}
 	      		</div>
 	    	</div>
 	  	</div>

@@ -4,6 +4,7 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
 
     reportDialogCtrl.products = products;
     reportDialogCtrl.flagCollapse = [];
+    reportDialogCtrl.productBatches = [];
 
     reportDialogCtrl.close = function () {
         $uibModalInstance.dismiss('close');
@@ -14,17 +15,21 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
     		var obj = new Object();
     		obj.key = product.barCode;
     		obj.value = false;
+            obj.batches = reportDialogCtrl.getBatches(product.barCode);
     		reportDialogCtrl.flagCollapse.push(obj);
     	});
     };
 
     reportDialogCtrl.invertFlagCollapse = function (barCode) {
+        var aux;
     	for (var i = reportDialogCtrl.flagCollapse.length - 1; i >= 0; i--) {
-    		if (reportDialogCtrl.flagCollapse[i].key === barCode) {
-    			reportDialogCtrl.flagCollapse[i].value = !reportDialogCtrl.flagCollapse[i].value;
+            aux = reportDialogCtrl.flagCollapse[i];
+    		if (aux.key === barCode) {
+    			aux.value = !aux.value;
     			break;
     		}
     	}
+        if (aux.value) reportDialogCtrl.getBatches(barCode);
     };
 
     reportDialogCtrl.getFlagCollapse = function (barCode) {
@@ -34,6 +39,23 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
     			break;
     		}
     	}
+    };
+
+    reportDialogCtrl.getBatches = function (barCode) {
+        ProductService.getBatchesByProduct(barCode)
+            .then(function successCallback(response) {
+                reportDialogCtrl.productBatches[barCode] = response;
+            }, function errorCallback(error) {
+        });
+    };
+
+    reportDialogCtrl.getBatchesFlagCollapse = function (barCode) {
+        for (var i = reportDialogCtrl.flagCollapse.length - 1; i >= 0; i--) {
+            if (reportDialogCtrl.flagCollapse[i].key === barCode) {
+                return reportDialogCtrl.flagCollapse[i].batches;
+                break;
+            }
+        }
     };
 
     reportDialogCtrl.insertFlagCollapse();

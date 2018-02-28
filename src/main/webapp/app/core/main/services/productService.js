@@ -3,7 +3,7 @@
 (function () {
     var app = angular.module("efApp");
 
-    app.service("ProductService", function ProductService($http, BASE_SERVER_URL, AuthService) {
+    app.service("ProductService", function ProductService($http, $q, BASE_SERVER_URL, AuthService) {
         var productService = this;
 
         productService.getAllProducts = function getAllProducts() {
