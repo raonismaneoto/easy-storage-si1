@@ -11,9 +11,9 @@ app.controller("ReportSupermarketDialogCtrl", function ($uibModalInstance, Produ
     };
 
     reportDialogCtrl.insertFlagCollapse = function () {
-    	reportDialogCtrl.products.forEach(function (product) {
+        _.forEach(products, function (product) {
             reportDialogCtrl.flagCollapse[product.barCode] = false;
-    	});
+        });
     };
 
     reportDialogCtrl.invertFlagCollapse = function (barCode) {
