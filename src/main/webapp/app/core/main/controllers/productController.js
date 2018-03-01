@@ -25,6 +25,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }, function errorCallback(error) {
             });
     };
+    
     productCtrl.orderProductsBy = function (field) {
         productCtrl.criterion = field;
         productCtrl.orderDirection = !productCtrl.orderDirection;
@@ -42,7 +43,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
         if (product.statusCode === 1 ) return  productCtrl.PRODUCT_AVAILABLE;
         if (product.statusCode === 2 ) return  productCtrl.PRODUCT_UNAVAILABLE;
-        
     }
 
     productCtrl.openCreateProductDialog = function() {
@@ -81,6 +81,21 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         });
     };
 
+    productCtrl.openReportSupermarketDialog = function(products) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'Relatório',
+            ariaDescribedBy: 'Relatório Geral do Supermercado',
+            templateUrl: 'app/core/main/views/reportSupermarketDialogView.html',
+            controller: 'ReportSupermarketDialogCtrl',
+            controllerAs: 'reportDialogCtrl',
+            resolve: {
+                products: function () {
+                    return angular.copy(products);
+                }
+            }
+        });
+    };
+
     productCtrl.openAssignProductPriceDialog = function(product) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'Atribuir preço a Produto',
@@ -100,21 +115,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
                 loadProductsList();
             }
         });
-    };
-
-    productCtrl.searchProductById = function(id) {
-        ProductService.getProductById(id)
-            .then(function successCallback(response) {
-                productCtrl.productsList = [
-                    response.data
-                ]
-            }, function errorCallback(error) {
-                if (error.status === 404) {
-                    toastr.error(error.data.errorMessage);
-                } else if (error.status === 400) {
-                    toastr.error("Produto não encontrado");
-                }
-            });
     };
 
     productCtrl.openCreateBatchDialog = function(product) {

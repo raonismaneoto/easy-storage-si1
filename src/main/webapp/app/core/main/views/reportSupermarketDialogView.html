@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<div class="col-md-8">
+	    <h3 class="modal-title" id="modal-title">Relatório do Estoque</h3>
+	</div>
+	<div class="col-md-4" align="right">
+		<button class="btn btn-danger btn-sm" type="button" ng-click="reportDialogCtrl.close()">x</button>
+	</div>
+</div>
+<div class="modal-body" id="modal-body">
+	<h4>Produtos:</h4>
+    <div class="panel-group" id="accordion">
+	 	<div class="panel panel-default" ng-repeat="product in reportDialogCtrl.products">
+	    	<div class="panel-heading">
+	      		<h4 class="panel-title font-weight-bold">
+	        		<a data-toggle="collapse" data-parent="#accordion" ng-click="reportDialogCtrl.invertFlagCollapse(product.barCode)">{{product.name}}</a>
+	      		</h4>
+	    	</div>
+	    	<div class="panel-collapse collapse in " ng-if="reportDialogCtrl.flagCollapse[product.barCode]">
+	    		<div class="panel-body" ng-repeat="batch in reportDialogCtrl.productBatches[product.barCode]">
+	    			<p>N° itens: {{batch.numberOfItems}}</p>
+	    			Data de Validade: {{batch.expirationDate}}
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+</div>

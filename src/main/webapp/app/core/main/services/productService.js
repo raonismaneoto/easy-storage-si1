@@ -3,7 +3,7 @@
 (function () {
     var app = angular.module("efApp");
 
-    app.service("ProductService", function ProductService($http, BASE_SERVER_URL, AuthService) {
+    app.service("ProductService", function ProductService($http, $q, BASE_SERVER_URL, AuthService) {
         var productService = this;
 
         productService.getAllProducts = function getAllProducts() {
@@ -17,5 +17,15 @@
         productService.createProduct = function createProduct(product) {
             return $http.post("/api/product/create", JSON.stringify(product))
         }
+
+        productService.getBatchesByProduct = function getBatchesByProduct(barCode) {
+            var deffered = $q.defer();
+            $http.get("/api/product/batch/" + barCode).then(function success(response) {
+                deffered.resolve(response.data);
+            }, function error(response) {
+                deffered.reject(response.data);
+            });
+            return deffered.promise;
+        };
     })
 })();
