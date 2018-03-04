@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 import com.ufcg.si1.model.Batch;
 import com.ufcg.si1.model.Product;
 import com.ufcg.si1.model.User;
+import com.ufcg.si1.model.Sale;
 import com.ufcg.si1.repositories.BatchRepository;
 import com.ufcg.si1.repositories.ProductRepository;
+import com.ufcg.si1.repositories.SaleRepository;
 import com.ufcg.si1.repositories.UserRepository;
 
 @Component
@@ -22,6 +24,8 @@ public class DataBaseOperations {
     
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired SaleRepository saleRepository;
 
     private static DataBaseOperations dataBaseOperations;
 
@@ -73,5 +77,22 @@ public class DataBaseOperations {
 
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    //Database operations for sale
+    public Sale getSale(long id) {
+        return saleRepository.findOne(id);
+    }
+
+    public Sale saveSale(Sale sale) {
+        return saleRepository.save(sale);
+    }
+
+    public void deleteSale(long id) {
+        saleRepository.delete(id);
+    }
+
+    public List<Sale> getSales() {
+        return saleRepository.findAll();
     }
 }
