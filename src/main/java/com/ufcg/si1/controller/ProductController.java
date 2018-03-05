@@ -23,7 +23,6 @@ import com.ufcg.si1.util.CustomErrorType;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin
 public class ProductController {
 
 	@Autowired

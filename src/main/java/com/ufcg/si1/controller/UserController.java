@@ -21,7 +21,6 @@ import exceptions.ObjectAlreadyExistsException;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin
 public class UserController {
 
     @Autowired
