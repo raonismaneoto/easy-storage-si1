@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Cancelar venda</h3>
+</div>
+<div class="modal-body" id="modal-body">
+        Tem certeza que deseja cancelar essa venda?
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="createSaleForm.$invalid" ng-click="cancelSaleCtrl.cancelSale()">Confirmar</button>
+    <button class="btn btn-danger" type="button" ng-click="cancelSaleCtrl.cancelDialog()">Cancelar</button>
+</div>
