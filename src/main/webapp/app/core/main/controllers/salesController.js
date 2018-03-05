@@ -34,7 +34,7 @@
                 ariaDescribedBy: 'Confirmação de cancelamento',
                 templateUrl: 'app/core/main/views/cancelSaleView.html',
                 controller: 'CancelSaleDialogController',
-                controllerAs: cancelSaleCtl,
+                controllerAs: 'cancelSaleCtrl',
                 resolve: {
                     sales: function () {
                         return salesCtrl.sales;

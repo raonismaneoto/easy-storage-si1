@@ -13,8 +13,10 @@
                     return currentSale.id === sale.id;
                 });
                 toastr.success('Venda removida com sucesso');
+                $uibModalInstance.close(201);
             }, function error(response) {
                 toastr.error(response);
+                $uibModalInstance.close(201);
             });
         };
 

@@ -27,5 +27,15 @@
             });
             return deffered.promise;
         };
+
+        service.createSale = function createSale(sale) {
+            var deffered = $q.defer();
+            $http.post(SALES_URI, sale).then(function success(response) {
+                deffered.resolve(response.data);
+            }, function error(response) {
+                deffered.reject(response.data);
+            });
+            return deffered.promise;
+        };
     });
 })();
