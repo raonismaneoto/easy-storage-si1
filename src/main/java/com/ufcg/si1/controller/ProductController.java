@@ -51,7 +51,7 @@ public class ProductController {
 		if (!productBatchService.productAlreadyExists(barCode)) {
 			return new ResponseEntity(new CustomErrorType("Problem with Product update"), HttpStatus.CONFLICT);
 		}
-		product = productBatchService.saveProduct(product);
+		product = productBatchService.updateProduct(product);
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 
@@ -63,6 +63,7 @@ public class ProductController {
 					HttpStatus.NOT_FOUND);
 		}
 		productBatchService.saveBatch(new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate()));
+		productBatchService.makeProductAvailable(product);
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
 

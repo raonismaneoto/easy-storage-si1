@@ -1,8 +1,6 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus) {
     
     var productCtrl = this;
-    productCtrl.PRODUCT_UNAVAILABLE = "Em Falta"
-    productCtrl.PRODUCT_AVAILABLE = "Disponivel"
     productCtrl.productsList = [];
     productCtrl.produtos = [];
     productCtrl.criteria = [
@@ -32,17 +30,18 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     };
 
     productCtrl.getProductPrice = function(product) {
-        var price = 0.0
-        if (product.price) {
+        var price = '';
+        if (product.statusCode == 1) {
             price = product.price;
+            var priceString = "R$" + price.toFixed(2); //com 2 casa decimais
         }
-        var priceString = price.toFixed(2); //com 2 casa decimais
+
         return priceString;
     }
 
     productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
-        if (product.statusCode === 1 ) return  productCtrl.PRODUCT_AVAILABLE;
-        if (product.statusCode === 2 ) return  productCtrl.PRODUCT_UNAVAILABLE;
+        if (product.statusCode === 1 ) return  ProductStatus.AVAILABLE.label;
+        if (product.statusCode === 2 ) return  ProductStatus.UNAVAILABLE.label;
     }
 
     productCtrl.openCreateProductDialog = function() {
@@ -125,9 +124,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             templateUrl: 'app/core/main/views/createBatchView.html',
             controller: 'BatchController as batchCtrl',
             resolve: {
-                product: function () {
-                    return angular.copy(product);
-                }
+                product: product
             }
         });
 
