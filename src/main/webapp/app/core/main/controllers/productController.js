@@ -33,15 +33,19 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         var price = '';
         if (product.statusCode == 1) {
             price = product.price;
-            var priceString = "R$" + price.toFixed(2); //com 2 casa decimais
+            var priceString = "R$" + intToStringWith2DecimalDigits(price);
         }
 
         return priceString;
     }
 
+    function intToStringWith2DecimalDigits(number) {
+        return number.toFixed(2)
+    }
+
     productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
-        if (product.statusCode === 1 ) return  ProductStatus.AVAILABLE.label;
-        if (product.statusCode === 2 ) return  ProductStatus.UNAVAILABLE.label;
+        if (product.statusCode === ProductStatus.AVAILABLE.value ) return  ProductStatus.AVAILABLE.label;
+        if (product.statusCode === ProductStatus.UNAVAILABLE.value ) return  ProductStatus.UNAVAILABLE.label;
     }
 
     productCtrl.openCreateProductDialog = function() {
