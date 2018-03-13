@@ -3,18 +3,31 @@ package com.ufcg.si1.model;
 import com.ufcg.si1.model.enumerations.DiscountType;
 
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import exceptions.NonExistentObjectException;
 
+//@Entity
 public class Category {
 
     private DiscountType discountType;
+
+  //  @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private String name;
 
-    public Category(double discountType , String name) throws NonExistentObjectException {
+    public Category(String name) {
         this.name = name;
         this.discountType = DiscountType.NO_DISCOUNT;
     }
+
+    public Category(double discount, String name) throws NonExistentObjectException {
+        this.name = name;
+        this.discountType = DiscountType.getByDiscountMultiplier(discount);
+    }
+
 
 
     public double getPriceMultiplier() {
@@ -26,8 +39,8 @@ public class Category {
         return discountType;
     }
 
-    public void setDiscountType(DiscountType discountType) {
-        this.discountType = discountType;
+    public void setDiscountType(double discount) throws NonExistentObjectException {
+        this.discountType = DiscountType.getByDiscountMultiplier(discount);
     }
 
     public String getName() {

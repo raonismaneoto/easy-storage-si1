@@ -3,7 +3,7 @@
 (function () {
 	var app = angular.module("efApp");
 
-	app.controller("BatchController", function BatchController($uibModalInstance, toastr, product, BatchService) {
+	app.controller("BatchController", function BatchController($uibModalInstance, toastr, product, BatchService,ProductStatus) {
 		var batchCtrl = this;
 
 		batchCtrl.product = product;
@@ -22,14 +22,16 @@
 			startingDay: 1
 		};
 
-		batchCtrl.createBatch = function createBatch(expirationDate, numberOfItems) {
+		batchCtrl.createBatch = function createBatch(expirationDate, numberOfItems) {	
 	        var batch = {
                 expirationDate: expirationDate.getDay() + "/" + (expirationDate.getMonth() + 1) + "/" + expirationDate.getFullYear(),
                 numberOfItems: numberOfItems
-            }
+			}
 
 	        BatchService.saveBatch(product, batch).then(function success(response) {
-	        	toastr.success("Lote criado com sucesso");
+				toastr.success("Lote criado com sucesso");
+				product.status = ProductStatus.AVAILABLE.key;
+				product.statusCode = ProductStatus.AVAILABLE.value;
 				$uibModalInstance.dismiss('cancel');
             }, function error(error) {
                 toastr.error("Problemas ao tentar criar lote");

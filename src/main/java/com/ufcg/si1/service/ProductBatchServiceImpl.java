@@ -38,7 +38,7 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	@Override
 	public Product updateProduct(Product product) {
 		//TODO Find a better way to do that
-		return saveProduct(product); 
+		return dataBaseOperations.saveProduct(product);
 	}
 
 	@Override
@@ -50,6 +50,12 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	public boolean productAlreadyExists(String barCode) {
 		Product product = dataBaseOperations.findProduct(barCode);
 		return product != null;
+	}
+
+	@Override
+	public void makeProductAvailable(Product product) {
+		product.setStatus(Status.AVAILABLE);
+		dataBaseOperations.saveProduct(product);
 	}
 	
 	/*

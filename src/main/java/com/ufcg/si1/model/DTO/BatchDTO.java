@@ -8,7 +8,6 @@ public class BatchDTO {
     public BatchDTO() {}
 
     public BatchDTO(int numberOfItens, String expirationDate) {
-        super();
         this.numberOfItems = numberOfItens;
         this.expirationDate = expirationDate;
     }

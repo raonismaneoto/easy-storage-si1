@@ -22,6 +22,7 @@ public interface ProductBatchService {
 
 	boolean productAlreadyExists(String barCode);
 	
+	void makeProductAvailable(Product product);
 	/*
 	 * Batch Operations
 	 */
