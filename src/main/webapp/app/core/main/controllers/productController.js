@@ -26,6 +26,10 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             });
     };
     
+    productCtrl.productsListIsEmpty = function () {
+        return _.isEmpty(productCtrl.productsList);
+    };
+
     productCtrl.orderProductsBy = function (field) {
         productCtrl.criterion = field;
         productCtrl.orderDirection = !productCtrl.orderDirection;
