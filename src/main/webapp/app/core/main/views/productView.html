@@ -32,7 +32,7 @@
           </ul>
         </div>
 
-        <div class="col-md-2" ng-if="productCtrl.isAdmin()">
+        <div class="col-md-2" ng-if="productCtrl.isAdmin() && !productCtrl.productsListIsEmpty()">
           <button class="btn btn-primary" type="button" ng-click="productCtrl.openReportSupermarketDialog(productCtrl.productsList)">Gerar Relatório</button>
         </div>
       </div>
