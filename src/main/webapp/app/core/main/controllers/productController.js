@@ -1,8 +1,8 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus, dateFilter) {
     
     var productCtrl = this;
     productCtrl.productsList = [];
-    productCtrl.produtos = [];
+    productCtrl.productsBatches = [];
     productCtrl.criteria = [
         {
             show: 'Nome',
@@ -20,10 +20,39 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         ProductService.getAllProducts()
             .then(function successCallback(response) {
                 productCtrl.productsList = response.data;
+                checksProductsValidity();
             }, function errorCallback(error) {
             });
     };
-    
+
+    var checksProductsValidity = function () {
+        var batchesByProduct = [];
+        var currentsDate = todaysDate();
+
+        _.forEach(productCtrl.productsList, function (product) {
+            ProductService.getBatchesByProduct(product.barCode)
+                .then(function successCallback(response) {
+                    batchesByProduct = response;
+                    productCtrl.productsBatches[product.barCode] = batchesByProduct;
+                    
+                    _.forEach(productCtrl.productsBatches[product.barCode], function (batch) {
+                        if (batch.expirationDate < currentsDate) {
+                            
+                        }
+                    });
+                }, function errorCallback(error) {
+                });
+        });
+    };
+
+    var todaysDate = function () {
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return [day, month, year].join('/');
+    };
+
     productCtrl.productsListIsEmpty = function () {
         return _.isEmpty(productCtrl.productsList);
     };
