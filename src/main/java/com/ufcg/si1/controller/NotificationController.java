@@ -1,5 +1,7 @@
 package com.ufcg.si1.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,12 @@ public class NotificationController {
 			userService.saveUser(admin);
 		}
 		return new ResponseEntity<Notification>(notification, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	public ResponseEntity<List<Notification>> findAll() {
+		List<Notification> notifications = notificationService.getNotifications();
+		return new ResponseEntity<List<Notification>>(notifications, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/subscribe", method = RequestMethod.POST)

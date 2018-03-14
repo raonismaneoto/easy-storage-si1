@@ -49,8 +49,8 @@
                 ariaLabelledBy: 'Notifications',
                 ariaDescribedBy: 'Notificações do Administrador',
                 templateUrl: 'app/core/main/views/notificationsView.html',
-                controller: 'AuthController',
-                controllerAs: 'authCtrl'
+                controller: 'NotificationController',
+                controllerAs: 'notificationCtrl'
             });
         };
         

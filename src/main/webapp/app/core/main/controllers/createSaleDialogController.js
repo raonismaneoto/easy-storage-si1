@@ -6,7 +6,7 @@
 (function () {
     var app = angular.module("efApp");
 
-    app.controller("CreateSaleDialogController", function CreateSaleDialogController(sales, toastr, 
+    app.controller("CreateSaleDialogController", function CreateSaleDialogController(NotificationService, sales, toastr, 
         ProductService, SalesService, $uibModalInstance) {
         var createSaleCtrl = this;
         createSaleCtrl.products = [];
@@ -72,6 +72,16 @@
          */
         createSaleCtrl.addProductAndQuantityPair = function addProductAndQuantityPair(quantity, product) {
             if(product.quantity >= quantity) {
+            	if (product.quantity - quantity < 15) {
+            		var notification = {
+            			message: product.name + " com menos de 15 unidades"
+            		}
+            		NotificationService.saveNotification(notification).then(function success(response) {
+            			toastr.success(notification.message);
+                    }, function error(response) {
+                        toastr.error("Problema na criaçao da notificação");
+                    })
+            	}
                 createSaleCtrl.productsQuantity.push({
                     barCode: product.barCode, quantity: quantity
                 });

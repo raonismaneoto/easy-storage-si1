@@ -16,6 +16,16 @@
     		return deffered.promise;
         }
         
+        notificationService.findAll = function findAll() {
+        	var deffered = $q.defer();
+    		$http.get('/api/notification/findAll').then(function success(response) {
+    			deffered.resolve(response.data);
+    		}, function error(response) {
+    			deffered.reject(response.data);
+    		});
+    		return deffered.promise;
+        }
+        
         notificationService.subscribe = function subscribe(admin) {
         	var deffered = $q.defer();
     		$http.post('/api/notification/subscribe', admin).then(function success(response) {

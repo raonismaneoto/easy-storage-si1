@@ -6,9 +6,9 @@
     app.controller("NotificationController", function NotificationController (NotificationService, toastr) {
     	var notificationCtrl = this;
     	
-    	notificationCtrl.notification = {
-    		message: "Bagui é doido mermo, mermão"
-    	}
+    	notificationCtrl.notifications = [];
+    	
+    	notificationCtrl.notification = { message: "" };
     	
     	notificationCtrl.saveNotification = function saveNotification(notification) {
     		NotificationService.saveNotification(notification).then(function success(response) {
@@ -17,5 +17,17 @@
                 toastr.error("Problema na criaçao da notificação");
             })
     	}	
+    	
+    	var findAll = function findAll() {
+    		NotificationService.findAll().then(function success(response) {
+    			notificationCtrl.notifications = response.data;
+    			toastr.success(response.data);
+    			toastr.success(notificationCtrl.notifications);
+            }, function error(response) {
+                toastr.error("Erro ao carregar a lista de notificações");
+            })
+    	}
+    	
+    	findAll();
     });
 })();
