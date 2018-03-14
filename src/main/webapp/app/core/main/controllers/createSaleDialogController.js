@@ -8,6 +8,7 @@
         var createSaleCtrl = this;
         createSaleCtrl.products = [];
         createSaleCtrl.saleProducts = [];
+        createSaleCtrl.productsQuantity = [];
 
         createSaleCtrl.createSale = function createSale() {
             var sale = prepareSale();
@@ -44,11 +45,18 @@
             return _.includes(createSaleCtrl.saleProducts, product);
         };
 
+        createSaleCtrl.addProductAndQuantityPair = function addProductAndQuantityPair(quantity, product) {
+            createSaleCtrl.productsQuantity.push({
+                barCode: product.barCode, quantity: quantity
+            });
+        };
+
         function createSaleInstance() {
             return new Sale({
                 products: createSaleCtrl.saleProducts,
                 itemsQuantity: createSaleCtrl.itemsQuantity,
-                totalPrice: createSaleCtrl.totalPrice
+                totalPrice: createSaleCtrl.totalPrice,
+                productsQuantity: createSaleCtrl.productsQuantity
             });
         }
 

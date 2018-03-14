@@ -62,8 +62,11 @@ public class ProductController {
 			return new ResponseEntity(new CustomErrorType("Unable to create batch. Product not found."),
 					HttpStatus.NOT_FOUND);
 		}
-		productBatchService.saveBatch(new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate()));
+		Batch batch = new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate());
+		productBatchService.saveBatch(batch);
+		product.setQuantity(product.getQuantity() + batch.getNumberOfItems());
 		productBatchService.makeProductAvailable(product);
+		productBatchService.saveProduct(product);
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
 
