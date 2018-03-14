@@ -1,24 +1,25 @@
-package com.ufcg.si1.model;
+package com.ufcg.si1.model.DTO;
 
 import java.math.BigDecimal;
-import java.util.Locale.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.ufcg.si1.model.DTO.ProductDTO;
+import com.ufcg.si1.model.Category;
+import com.ufcg.si1.model.Product;
 import com.ufcg.si1.model.enumerations.DiscountType;
 import com.ufcg.si1.model.enumerations.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 
 import exceptions.NonExistentObjectException;
 
-@Entity
-public class Product {
 
-	@Id
+public class ProductDTO {
+
+
 	private String barCode;
 	
 	private String name;
@@ -29,20 +30,37 @@ public class Product {
 
 	private String category;
 	
-	public Status status; 
+    public Status status; 
+    
+	public DiscountType discountType;
+	
 
-	public Product() {
+	public ProductDTO() {
 		this.price = new BigDecimal(0);
+		this.status = Status.UNAVAILABLE;
+		this.discountType = DiscountType.NO_DISCOUNT;
 	}
 
-	public Product(ProductDTO product) {
-		this.name = product.getName();
+
+	public ProductDTO(String name, String barCode, String producer,
+			String categoryName) {
+		this.name = name;
+		this.price = new BigDecimal(0);
+		this.barCode = barCode;
+		this.producer = producer;
+		this.category = categoryName;
+    }
+    
+    public ProductDTO(Product product, Category category) {
+        this.name = product.getName();
 		this.price = product.getPrice();
 		this.barCode = product.getBarCode();
 		this.producer = product.getProducer();
-		this.category = product.getCategory();
-		this.status = product.getStatus();
-	}
+		this.category = category.getName();
+        this.status = product.getStatus();
+        this.discountType = category.getDiscountType();
+
+    }
 
 	public String getName() {
 		return name;
@@ -89,41 +107,22 @@ public class Product {
 	}
 
 	public int getStatusCode() {
-		return this.status.getStatusCode();
+		return status.getStatusCode();
 	}
 
-	public Status getStatus() {
+    public Status getStatus() {
 		return this.status;
-	}
+    }
+    
+    public DiscountType getDiscountType() {
+        return this.discountType;
+    }   
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((producer == null) ? 0 : producer.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+    public void setDiscountType(DiscountType discount) {
+        this.discountType = discount;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (producer == null) {
-			if (other.producer != null)
-				return false;
-		} else if (!producer.equals(other.producer))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+	
+	public double getDiscountMultiplyer() {
+		return this.discountType.getDiscountMultiplier();
 	}
 }

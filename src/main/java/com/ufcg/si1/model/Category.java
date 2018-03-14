@@ -1,5 +1,6 @@
 package com.ufcg.si1.model;
 
+import com.ufcg.si1.model.DTO.ProductDTO;
 import com.ufcg.si1.model.enumerations.DiscountType;
 
 import java.util.Objects;
@@ -10,23 +11,24 @@ import javax.persistence.Id;
 
 import exceptions.NonExistentObjectException;
 
-//@Entity
+@Entity
 public class Category {
 
     private DiscountType discountType;
 
-  //  @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private String name;
 
-    public Category(String name) {
-        this.name = name;
-        this.discountType = DiscountType.NO_DISCOUNT;
+
+    public Category() {
     }
 
-    public Category(double discount, String name) throws NonExistentObjectException {
-        this.name = name;
-        this.discountType = DiscountType.getByDiscountMultiplier(discount);
+    public Category(ProductDTO product) {
+        this.name = product.getCategory();
+        this.discountType = product.getDiscountType();
     }
+
+   
 
 
 
@@ -39,8 +41,8 @@ public class Category {
         return discountType;
     }
 
-    public void setDiscountType(double discount) throws NonExistentObjectException {
-        this.discountType = DiscountType.getByDiscountMultiplier(discount);
+    public void setDiscountType(DiscountType discountType) throws NonExistentObjectException {
+        this.discountType = discountType;
     }
 
     public String getName() {

@@ -15,6 +15,7 @@
         }
 
         productService.createProduct = function createProduct(product) {
+            console.log(JSON.stringify(product));
             return $http.post("/api/product/create", JSON.stringify(product))
         }
 

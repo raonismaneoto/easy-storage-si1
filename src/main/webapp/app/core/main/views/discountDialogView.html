@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<div class="col-md-8">
+	    <h3 class="modal-title" id="modal-title">Mudança de desconto</h3>
+	</div>
+	<div class="col-md-4" align="right">
+		<button class="btn btn-danger btn-sm" type="button" ng-click="discountDialogCtrl.close()">x</button>
+	</div>
+</div>
+	<div class="dropdown col-md-2" ng-if="productCtrl.isAdmin()">
+		<button class="btn btn-primary" type="button" data-toggle="dropdown">Categoria
+		  <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+		  <li ng-repeat="category in discountDialogCtrl.categories">
+			<a>{{category.name}}</a>
+		  </li>
+		</ul>
+	  </div>
+</div>

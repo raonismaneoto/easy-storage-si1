@@ -31,7 +31,6 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	
 	@Override
 	public Product saveProduct(Product product) {
-		product.setStatus(Status.UNAVAILABLE);
 		return dataBaseOperations.saveProduct(product);
 	}
 	

@@ -1,7 +1,8 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus, CategoryService) {
     
     var productCtrl = this;
     productCtrl.productsList = [];
+    productCtrl.categoriesList = [];
     productCtrl.produtos = [];
     productCtrl.criteria = [
         {
@@ -23,6 +24,18 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             }, function errorCallback(error) {
             });
     };
+
+    var loadCategoriesList = function () {
+        
+    }
+    productCtrl.loadCategoriesList = function () {
+        CategoryService.getAllCategories()
+            .then(function successCallback(response) {
+                productCtrl.categoriesList = response.data;
+                console.log(response.data);
+            }, function errorCallback(error) {
+            });
+    }
     
     productCtrl.productsListIsEmpty = function () {
         return _.isEmpty(productCtrl.productsList);
@@ -35,8 +48,8 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
 
     productCtrl.getProductPrice = function(product) {
         var price = '';
-        if (product.statusCode == 1) {
-            price = product.price;
+        if (product.statusCode ==  ProductStatus.AVAILABLE.key) {
+            price = product.price*product.discountMultiplyer;
             var priceString = "R$" + intToStringWith2DecimalDigits(price);
         }
 
@@ -75,6 +88,21 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             templateUrl: 'app/core/main/views/loginView.html',
             controller: '',
             controllerAs: ''
+        });
+    };
+
+    productCtrl.openDiscountDialog = function() {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'Mudar desconto',
+            ariaDescribedBy: 'Tabela para mudança de desconto',
+            templateUrl: 'app/core/main/views/discountDialogView.html',
+            controller: 'DiscountDialogCtrl',
+            controllerAs: 'discountDialogCtrl',
+            resolve: {
+                categories: function () {
+                    return angular.copy(productCtrl.categoriesList);
+                }
+            }
         });
     };
 

@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ufcg.si1.model.Batch;
+import com.ufcg.si1.model.Category;
 import com.ufcg.si1.model.Product;
 import com.ufcg.si1.model.User;
 import com.ufcg.si1.model.Sale;
 import com.ufcg.si1.repositories.BatchRepository;
+import com.ufcg.si1.repositories.CategoryRepository;
 import com.ufcg.si1.repositories.ProductRepository;
 import com.ufcg.si1.repositories.SaleRepository;
 import com.ufcg.si1.repositories.UserRepository;
@@ -25,7 +27,11 @@ public class DataBaseOperations {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired SaleRepository saleRepository;
+    @Autowired 
+    private SaleRepository saleRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private static DataBaseOperations dataBaseOperations;
 
@@ -94,5 +100,24 @@ public class DataBaseOperations {
 
     public List<Sale> getSales() {
         return saleRepository.findAll();
+    }
+
+
+
+    //Database operations for category
+	public Category saveCategory(Category category) {
+		return categoryRepository.save(category);
+	}
+
+	public Category getCategory(String categoryName) {
+		return categoryRepository.findOne(categoryName);
+	}
+
+	public Category updateCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+    
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll();
     }
 }
