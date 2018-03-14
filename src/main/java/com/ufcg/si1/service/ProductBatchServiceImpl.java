@@ -36,7 +36,7 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	}
 
 	@Override
-	public Product updateProduct(Product product) 
+	public Product updateProduct(Product product) {
 		//TODO Find a better way to do that
 		return dataBaseOperations.saveProduct(product);
 	}
