@@ -20,9 +20,7 @@
     	
     	var findAll = function findAll() {
     		NotificationService.findAll().then(function success(response) {
-    			notificationCtrl.notifications = response.data;
-    			toastr.success(response.data);
-    			toastr.success(notificationCtrl.notifications);
+    			notificationCtrl.notifications = response;
             }, function error(response) {
                 toastr.error("Erro ao carregar a lista de notificações");
             })
