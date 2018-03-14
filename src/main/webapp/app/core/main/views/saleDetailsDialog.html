@@ -10,11 +10,12 @@
     <h4>Produtos:</h4>
     <div class="panel-group" id="accordion">
             <div class="panel panel-default" ng-repeat="product in saleDetailsCtrl.sale.products">
-            <div class="panel-heading">
-                <h4 class="panel-title font-weight-bold">
-                <span data-toggle="collapse" data-parent="#accordion">{{product.name}}</span>
-                </h4>
-            </div>
+                <div class="panel-heading">
+                    <h4 class="panel-title font-weight-bold events">
+                        <span data-toggle="collapse" data-parent="#accordion">{{product.name}}</span>
+                        <span data-toggle="collapse" data-parent="#accordion" style="margin-left: 100px;">Quantidade: {{saleDetailsCtrl.getQuantity(product)}}</span>
+                    </h4>
+                </div>
             </div>
     </div>
 </div>
