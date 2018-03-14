@@ -14,6 +14,16 @@
 				deffered.reject(response.data);
 			});
 			return deffered.promise; 
-		}
+		};
+
+		batchService.deleteBatch = function deleteBatch(batchId) {
+            var deffered = $q.defer();
+            $http.delete('/api/product/batch/' + batchId).then(function success(response) {
+                deffered.resolve(response);
+            }, function error(response) {
+                deffered.reject(response);
+            });
+            return deffered.promise;
+        };
 	});
 })();

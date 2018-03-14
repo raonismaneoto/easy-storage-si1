@@ -70,6 +70,11 @@ public class ProductController {
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
 
+	@RequestMapping(value = "/batch/{id}", method = RequestMethod.DELETE)
+	public void deleteBatch(@PathVariable long id) {
+		productBatchService.deleteBatch(id);
+	}
+
 	@RequestMapping(value="/batch/{barCode}", method = RequestMethod.GET)
 	public ResponseEntity<List<Batch>> getBatchesByProduct(@PathVariable("barCode") String barCode) {
 		Product product = productBatchService.findProductByBarCode(barCode);

@@ -1,4 +1,4 @@
-app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus, dateFilter) {
+app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$location, ProductService, AuthService, ProductStatus, BatchService) {
     
     var productCtrl = this;
     productCtrl.productsList = [];
@@ -22,7 +22,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
                 productCtrl.productsList = response.data;
                 checksProductsValidity();
             }, function errorCallback(error) {
-            });
+        });
     };
 
     var checksProductsValidity = function () {
@@ -42,23 +42,33 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
 
     var checksForAllBatches = function (product) {
         _.forEach(productCtrl.productsBatches[product.barCode], function (batch) {
-            if (batch.expirationDate < todaysDate() && product.quantity > 0)
-                product.quantity -= batch.numberOfItems;        
+            if (batch.expirationDate < todaysDate() && product.quantity > 0) {
+                product.quantity -= batch.numberOfItems;
+                BatchService.deleteBatch(batch.id)
+                    .then(function successCallback(response) {
+                        _.remove(productsBatches[product.barCode], function (each) {
+                            return each.id === batch.id;
+                        });
+                    }, function errorCallback(error) {
+                    });
+            }
         });
-        if (product.quantity <= 0) product.statusCode = 2;
+        if (product.quantity <= 0) product.statusCode = ProductStatus.UNAVAILABLE.value;
     };
 
     var updateProduct = function (product) {
         ProductService.updateProduct(product.barCode, product)
             .then(function successCallback(response) {
+                product = response.data;
             }, function errorCallback(error) {
             });
     };
 
     var todaysDate = function () {
+        const MONTHS_COUNTING_ADJUSTER = 1;
         var date = new Date();
         var day = date.getDate();
-        var month = date.getMonth() + 1;
+        var month = date.getMonth() + MONTHS_COUNTING_ADJUSTER;
         var year = date.getFullYear();
         return [day, month, year].join('/');
     };
