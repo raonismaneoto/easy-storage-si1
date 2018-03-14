@@ -3,7 +3,7 @@
 (function () {
     var app = angular.module("efApp");
 
-    app.controller("LoginController", function LoginController(AuthService, toastr, $uibModalInstance) {
+    app.controller("LoginController", function LoginController(AuthService, NotificationService, toastr, $uibModalInstance) {
         var loginCtrl = this;
 
         loginCtrl.login = function login() {
@@ -23,7 +23,9 @@
             if(isPasswordValid()) {
                 var user = createUser();
                 AuthService.subscribeAdmin(user).then(function success(response) {
-                    AuthService.user = new User(response);
+                    var newUser = new User(response);
+                	AuthService.user = newUser;
+                	NotificationService.subscribe(newUser).then(function success(response) {}, function error(response) {});
                     toastr.success("Cadastro realizado com sucesso");
                 }, function error(response) {
                     toastr.error("Não foi possível realizar o cadastro");

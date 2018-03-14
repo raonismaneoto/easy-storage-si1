@@ -52,6 +52,10 @@
             return authService.user.isAdmin();
         }
 
+        authService.getCurrentUser = function getCurrentUser() {
+        	return authService.getLastUser();
+        }
+        
         function getLastUser() {
             $http.get("/api/user/lastuser").then(function success(response) {
                 if(response.data.userName) {
