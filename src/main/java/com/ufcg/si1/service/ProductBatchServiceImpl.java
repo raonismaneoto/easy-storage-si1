@@ -76,6 +76,11 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 		batch.setProduct(product);
 		return dataBaseOperations.saveBatch(batch);
 	}
+
+	@Override
+	public void deleteBatch(long batchId) {
+		dataBaseOperations.deleteBatch(batchId);
+	}
 	
 	@Override
 	public List<Batch> getBatchesByProduct(Product product) {
