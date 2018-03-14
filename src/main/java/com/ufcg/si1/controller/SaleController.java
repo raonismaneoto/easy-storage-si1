@@ -40,12 +40,12 @@ public class SaleController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public ResponseEntity<Sale> saveSale(@RequestBody Sale sale) {
+    public ResponseEntity<Sale> saveSale(@RequestBody Sale sale) throws Exception{
         return new ResponseEntity<Sale>(saleService.saveSale(sale), HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public void deleteSale(@PathVariable long id) {
+    public void deleteSale(@PathVariable long id) throws Exception{
         saleService.deleteSale(id);
     }
 }

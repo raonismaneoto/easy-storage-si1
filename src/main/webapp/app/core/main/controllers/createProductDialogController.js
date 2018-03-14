@@ -1,19 +1,17 @@
+
+/**
+ * Controller for the dialog responsible for creating a product
+ */
 app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, toastr, ProductService, AuthService) {
 
     var viewModel = this;
 
     viewModel.product = {};
 
-    viewModel.listaDeSituacoes = [
-        {
-            label: "Disponivel",
-            value: 1
-        }, {
-            label: "Em Falta",
-            value: 2
-        }
-    ];
-
+    /**
+     * Creates a product
+     * @param product - the product to be created
+     */
     viewModel.createProduct = function (product) {
         if(AuthService.isAdmin()) {
             ProductService.createProduct(product)
@@ -31,6 +29,9 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
         }
     };
 
+    /**
+     * Closes the current modal
+     */
     viewModel.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };

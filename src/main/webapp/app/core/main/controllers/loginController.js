@@ -1,11 +1,17 @@
 'use strict';
 
+/**
+ * Controller responsible for the login
+ */
 (function () {
     var app = angular.module("efApp");
 
     app.controller("LoginController", function LoginController(AuthService, NotificationService, toastr, $uibModalInstance) {
         var loginCtrl = this;
 
+        /**
+         * Tries to log in
+         */
         loginCtrl.login = function login() {
             if(canLogin()) {
                 AuthService.getUser(loginCtrl.username, loginCtrl.password).then(function success(response) {
@@ -19,6 +25,9 @@
             $uibModalInstance.dismiss('cancel');
         };
 
+        /**
+         * Tries to register a new administrator
+         */
         loginCtrl.subscribeAdmin = function subscribeAdmin() {
             if(isPasswordValid()) {
                 var user = createUser();
@@ -37,6 +46,9 @@
             $uibModalInstance.dismiss('cancel');
         };
 
+        /**
+         * Tries to register a new client
+         */
         loginCtrl.subscribeClient = function subscribeClient() {
             if(isPasswordValid()) {
                 var user = createUser();
@@ -53,6 +65,9 @@
             $uibModalInstance.dismiss('cancel');
         };
 
+        /**
+         * Returns true if all login fields are valid
+         */
         function canLogin() {
             var loginAllowed = true;
 
@@ -66,10 +81,16 @@
             return loginAllowed;
         }
 
+        /**
+         * Returns true if the password and its confirmation are equal
+         */
         function isPasswordValid() {
             return loginCtrl.password === loginCtrl.confirmPassword;
         }
 
+        /**
+         * Creates a new instance of the User class
+         */
         function createUser() {
             return new User({
                 username: loginCtrl.username,
@@ -77,6 +98,9 @@
             });
         }
 
+        /**
+         * Clears the login fields
+         */
         function clearFields() {
             loginCtrl.username = "";
             loginCtrl.password = "";

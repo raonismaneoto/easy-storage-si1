@@ -12,9 +12,11 @@ import com.ufcg.si1.model.User;
 import com.ufcg.si1.notification.Notification;
 import com.ufcg.si1.repositories.BatchRepository;
 import com.ufcg.si1.repositories.NotificationRepository;
+import com.ufcg.si1.repositories.ProductQuantityPairRepository;
 import com.ufcg.si1.repositories.ProductRepository;
 import com.ufcg.si1.repositories.SaleRepository;
 import com.ufcg.si1.repositories.UserRepository;
+import com.ufcg.si1.model.ProductQuantityPair;
 
 @Component
 public class DataBaseOperations {

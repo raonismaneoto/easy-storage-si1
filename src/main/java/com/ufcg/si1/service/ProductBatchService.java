@@ -22,12 +22,15 @@ public interface ProductBatchService {
 
 	boolean productAlreadyExists(String barCode);
 	
+	void makeProductAvailable(Product product);
 	/*
 	 * Batch Operations
 	 */
 	List<Batch> findAllBatches();
 
 	Batch saveBatch(Batch batch);
+
+	void deleteBatch(long batchId);
 
 	List<Batch> getBatchesByProduct(Product product);
 }

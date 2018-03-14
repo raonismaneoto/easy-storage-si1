@@ -4,8 +4,14 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+import com.ufcg.si1.model.enumerations.DiscountType;
 import com.ufcg.si1.model.enumerations.Status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import exceptions.NonExistentObjectException;
 
 @Entity
 public class Product {
@@ -21,10 +27,13 @@ public class Product {
 
 	private String category;
 	
-	public Status status; 
+	public Status status;
+
+	private int quantity;
 
 	public Product() {
 		this.price = new BigDecimal(0);
+		this.quantity = 0;
 	}
 
 	public Product(long id, String name, String barCode, String producer,
@@ -35,6 +44,7 @@ public class Product {
 		this.producer = producer;
 		this.category = categoryName;
 		this.status = Status.UNAVAILABLE;
+		this.quantity = 0;
 	}
 
 	public String getName() {
@@ -83,6 +93,14 @@ public class Product {
 
 	public int getStatusCode() {
 		return status.getStatusCode();
+	}
+
+	public int getQuantity() {
+		return this.quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override

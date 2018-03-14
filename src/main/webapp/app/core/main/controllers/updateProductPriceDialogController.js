@@ -1,9 +1,17 @@
+
+/**
+ * Controller for the modal dialog responsible for updating price of product
+ */
 app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, ProductService, toastr, product) {
 
     var updateDialogCtrl = this;
 
     updateDialogCtrl.product = product;
 
+    /**
+     * Updates an existing product
+     * @param product - the product to be edited
+     */
     updateDialogCtrl.submit = function (product) {
 
         ProductService.updateProduct(product.barCode, product)
@@ -22,6 +30,9 @@ app.controller("UpdateProductPriceDialogCtrl", function ($uibModalInstance, Prod
 
     };
 
+    /**
+     * Closes the current modal
+     */
     updateDialogCtrl.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };

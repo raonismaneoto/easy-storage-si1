@@ -36,7 +36,8 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	}
 
 	@Override
-	public Product updateProduct(Product product) {
+	public Product updateProduct(Product product) 
+		//TODO Find a better way to do that
 		return dataBaseOperations.saveProduct(product);
 	}
 
@@ -51,6 +52,12 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 		return product != null;
 	}
 
+	@Override
+	public void makeProductAvailable(Product product) {
+		product.setStatus(Status.AVAILABLE);
+		dataBaseOperations.saveProduct(product);
+	}
+	
 	/*
 	 * Batch Operations
 	 */
@@ -70,6 +77,11 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 		return dataBaseOperations.saveBatch(batch);
 	}
 
+	@Override
+	public void deleteBatch(long batchId) {
+		dataBaseOperations.deleteBatch(batchId);
+	}
+	
 	@Override
 	public List<Batch> getBatchesByProduct(Product product) {
 		return dataBaseOperations.getBatchesByProduct(product);
