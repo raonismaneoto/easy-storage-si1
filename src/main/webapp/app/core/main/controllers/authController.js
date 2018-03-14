@@ -1,11 +1,17 @@
 'use strict';
 
+/**
+ * Authentication Controller
+ */
 (function () {
     var app = angular.module("efApp");
 
     app.controller("AuthController", function AuthController ($uibModal, AuthService, toastr) {
         var authCtrl = this;
 
+        /**
+         * Opens a modal with the Login View
+         */
         authCtrl.openLoginDialog = function openLoginDialog() {
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Login',
@@ -15,7 +21,10 @@
                 controllerAs: 'loginCtrl'
             });
         };
-    
+        
+        /**
+         * Opens a modal with the Register View
+         */
         authCtrl.openRegisterDialog = function openRegisterDialog() {
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Register',
@@ -26,6 +35,9 @@
             });
         };
 
+        /**
+         * Returns true if some user is logged in, and false otherwise
+         */
         authCtrl.isLogged = function isLogged() {
             if(!AuthService.user.userName || _.isEmpty(AuthService.user.userName)) {
                 return false;
@@ -33,6 +45,9 @@
             return true;
         }
 
+        /**
+         * Logs out the current user
+         */
         authCtrl.logout = function logout() {
             AuthService.logout().then(function success(response) {
                 AuthService.user = new User();
