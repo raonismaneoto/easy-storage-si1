@@ -14,6 +14,7 @@
         createSaleCtrl.productsQuantity = [];
         createSaleCtrl.productQuantity = {};
         createSaleCtrl.bought = {};
+        createSaleCtrl.isSaleValid = true;
 
 
         /**
@@ -31,7 +32,8 @@
                     $uibModalInstance.close(201);
                 });
             } else {
-                toastr.error("A venda deve conter pelo menos um produto.");
+                toastr.error("Problemas ao criar a venda.");
+                createSaleCtrl.isSaleValid = true;
             }
             
         };
@@ -96,18 +98,26 @@
                 if(_.includes(createSaleCtrl.saleProducts, product)) {
                     createSaleCtrl.addOrRemoveProduct(product);
             }
+            createSaleCtrl.isSaleValid = false;
         }
 
         /**
          * Creates a new instance of a Sale class
          */
         function createSaleInstance() {
-            return new Sale({
-                products: createSaleCtrl.saleProducts,
-                itemsQuantity: createSaleCtrl.itemsQuantity,
-                totalPrice: createSaleCtrl.totalPrice,
-                productsQuantity: createSaleCtrl.productsQuantity
+            _.each(createSaleCtrl.saleProducts, function(product) {
+                createSaleCtrl.addProductAndQuantityPair(createSaleCtrl.productQuantity[product.barCode], product);
             });
+            if(createSaleCtrl.isSaleValid) {
+                return new Sale({
+                    products: createSaleCtrl.saleProducts,
+                    itemsQuantity: createSaleCtrl.itemsQuantity,
+                    totalPrice: createSaleCtrl.totalPrice,
+                    productsQuantity: createSaleCtrl.productsQuantity
+                });
+            } else {
+                return undefined;
+            }
         }
 
         /**
@@ -136,7 +146,7 @@
             createSaleCtrl.itemsQuantity = _.size(createSaleCtrl.saleProducts);
             getTotalPrice();
             var sale = createSaleInstance();
-            return _.size(sale.products) > 0? sale : undefined;
+            return sale && _.size(sale.products) > 0? sale : undefined;
         }
 
         
