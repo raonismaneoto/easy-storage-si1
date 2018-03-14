@@ -13,6 +13,8 @@
         createSaleCtrl.saleProducts = [];
         createSaleCtrl.productsQuantity = [];
         createSaleCtrl.productQuantity = {};
+        createSaleCtrl.bought = {};
+
 
         /**
          * Creates a sale
@@ -73,6 +75,7 @@
                 createSaleCtrl.productsQuantity.push({
                     barCode: product.barCode, quantity: quantity
                 });
+                createSaleCtrl.bought[product.barCode] = quantity;
             } else {
                 warnProductQuantity(product);
             }
@@ -114,7 +117,7 @@
         function getTotalPrice() {
             var totalPrice = 0;
             _.each(createSaleCtrl.saleProducts, function(product) {
-                totalPrice += product.price;
+                totalPrice += product.price*createSaleCtrl.bought[product.barCode];
             });
             createSaleCtrl.totalPrice = totalPrice;
         }

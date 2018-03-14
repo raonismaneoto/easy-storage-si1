@@ -35,15 +35,22 @@
         <div class="col-md-2" ng-if="productCtrl.isAdmin() && !productCtrl.productsListIsEmpty()">
           <button class="btn btn-primary" type="button" ng-click="productCtrl.openReportSupermarketDialog(productCtrl.productsList)">Gerar Relatório</button>
         </div>
+        <div class="col-md-2" ng-if="productCtrl.isAdmin() && !productCtrl.productsListIsEmpty()">
+          <button class="btn btn-primary" type="button" ng-click=" productCtrl.openDiscountDialog()">Mudar Desconto</button>
+        </div>
+
       </div>
     </div>
+
+
+
 
     <div class="flex-row row">
       <div class="col-xs-6 col-sm-5 col-lg-4" ng-repeat="product in productCtrl.productsList | orderBy:productCtrl.criterion:!productCtrl.orderDirection | filter:productCtrl.searchCriteria">
         <div class="thumbnail">
           <div class="caption">
             <h4 id="product-name">
-              <a href="#">{{product.name}}</a>
+              <span class="text-primary">{{product.name}}</span>
             </h4>
             <h5 id="product-price" ng-if="product.statusCode === 1">
               <div>

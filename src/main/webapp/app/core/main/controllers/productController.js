@@ -107,8 +107,8 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
      */
     productCtrl.getProductPrice = function(product) {
         var price = '';
-        if (product.statusCode == 1) {
-            price = product.price;
+        if (product.statusCode ===  ProductStatus.AVAILABLE.value) {
+            price = product.price*product.discountMultiplyer;
             var priceString = "R$" + intToStringWith2DecimalDigits(price);
         }
 
@@ -162,6 +162,30 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             controller: '',
             controllerAs: ''
         });
+    };
+
+    productCtrl.openDiscountDialog = function() {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'Mudar desconto',
+            ariaDescribedBy: 'Tabela para mudança de desconto',
+            templateUrl: 'app/core/main/views/discountDialogView.html',
+            controller: 'DiscountDialogCtrl',
+            controllerAs: 'discountDialogCtrl',
+            resolve: {
+                categories: function () {
+                    return angular.copy(productCtrl.categoriesList);
+                }
+            }
+
+        });
+
+        modalInstance.result.then(function (result) {
+                loadProductsList();
+            } ,function (result) {
+                loadProductsList();
+            });
+
+
     };
 
     /**
