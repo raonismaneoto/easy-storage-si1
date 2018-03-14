@@ -49,6 +49,7 @@
         function getSales() {
             SalesService.getSales().then(function success(data) {
                 salesCtrl.sales = data;
+                console.log(data);
             }, function error(data) {
                 toastr.error(data);
             });
