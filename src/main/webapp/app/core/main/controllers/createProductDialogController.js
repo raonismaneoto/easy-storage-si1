@@ -4,16 +4,6 @@ app.controller("CreateProductDialogCtrl", function ($uibModalInstance, $http, to
 
     viewModel.product = {};
 
-    viewModel.listaDeSituacoes = [
-        {
-            label: "Disponivel",
-            value: 1
-        }, {
-            label: "Em Falta",
-            value: 2
-        }
-    ];
-
     viewModel.createProduct = function (product) {
         if(AuthService.isAdmin()) {
             ProductService.createProduct(product)

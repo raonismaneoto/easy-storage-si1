@@ -4,8 +4,14 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+import com.ufcg.si1.model.enumerations.DiscountType;
 import com.ufcg.si1.model.enumerations.Status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import exceptions.NonExistentObjectException;
 
 @Entity
 public class Product {
