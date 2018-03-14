@@ -9,6 +9,7 @@
         createSaleCtrl.products = [];
         createSaleCtrl.saleProducts = [];
         createSaleCtrl.productsQuantity = [];
+        createSaleCtrl.productQuantity = {};
 
         createSaleCtrl.createSale = function createSale() {
             var sale = prepareSale();
@@ -46,10 +47,21 @@
         };
 
         createSaleCtrl.addProductAndQuantityPair = function addProductAndQuantityPair(quantity, product) {
-            createSaleCtrl.productsQuantity.push({
-                barCode: product.barCode, quantity: quantity
-            });
+            if(product.quantity >= quantity) {
+                createSaleCtrl.productsQuantity.push({
+                    barCode: product.barCode, quantity: quantity
+                });
+            } else {
+                warnProductQuantity(product);
+            }
         };
+
+        function warnProductQuantity(product) {
+            toastr.error('A quantidade máxima para esse produto é de: ' + product.quantity);
+                if(_.includes(createSaleCtrl.saleProducts, product)) {
+                    createSaleCtrl.addOrRemoveProduct(product);
+            }
+        }
 
         function createSaleInstance() {
             return new Sale({
@@ -62,7 +74,9 @@
 
         function getAllProducts() {
             ProductService.getAllProducts().then(function sucess(response) {
-                createSaleCtrl.products = response.data;
+                createSaleCtrl.products = _.filter(response.data, (product) => {
+                    return product.quantity > 0;
+                });
             });
         }
 

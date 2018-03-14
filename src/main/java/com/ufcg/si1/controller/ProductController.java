@@ -63,10 +63,10 @@ public class ProductController {
 					HttpStatus.NOT_FOUND);
 		}
 		Batch batch = new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate());
-		productBatchService.saveBatch(batch);
 		product.setQuantity(product.getQuantity() + batch.getNumberOfItems());
 		productBatchService.makeProductAvailable(product);
 		productBatchService.saveProduct(product);
+		productBatchService.saveBatch(batch);
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
 	}
 
