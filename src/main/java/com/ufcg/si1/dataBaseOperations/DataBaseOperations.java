@@ -1,4 +1,5 @@
 package com.ufcg.si1.dataBaseOperations;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Component;
 import com.ufcg.si1.model.Batch;
 import com.ufcg.si1.model.Category;
 import com.ufcg.si1.model.Product;
-import com.ufcg.si1.model.User;
 import com.ufcg.si1.model.Sale;
+import com.ufcg.si1.model.User;
+import com.ufcg.si1.notification.Notification;
 import com.ufcg.si1.repositories.BatchRepository;
 import com.ufcg.si1.repositories.CategoryRepository;
+import com.ufcg.si1.repositories.NotificationRepository;
 import com.ufcg.si1.repositories.ProductQuantityPairRepository;
 import com.ufcg.si1.repositories.ProductRepository;
 import com.ufcg.si1.repositories.SaleRepository;
@@ -34,6 +37,10 @@ public class DataBaseOperations {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+
+	@Autowired
+	private NotificationRepository notificationRepository;
     
     @Autowired
     private ProductQuantityPairRepository productQuantityRepository;
@@ -137,4 +144,21 @@ public class DataBaseOperations {
     public ProductQuantityPair saveProductQuantityPair(ProductQuantityPair pair) {
         return productQuantityRepository.save(pair);
     }
+
+    	// Database operations for notification
+	public Notification getNotification(long id) {
+		return notificationRepository.findOne(id);
+	}
+
+	public Notification saveNotification(Notification notification) {
+		return notificationRepository.save(notification);
+	}
+
+	public void deleteNotification(long id) {
+		notificationRepository.delete(id);
+	}
+
+	public List<Notification> getNotifications() {
+		return notificationRepository.findAll();
+	}
 }

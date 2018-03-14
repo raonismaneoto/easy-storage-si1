@@ -15,7 +15,7 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 
 	@Autowired
 	private DataBaseOperations dataBaseOperations;
-	
+
 	/*
 	 * Product Operations
 	 */
@@ -28,12 +28,12 @@ public class ProductBatchServiceImpl implements ProductBatchService {
 	public Product findProductByBarCode(String barCode) {
 		return dataBaseOperations.findProduct(barCode);
 	}
-	
+
 	@Override
 	public Product saveProduct(Product product) {
 		return dataBaseOperations.saveProduct(product);
 	}
-	
+
 	@Override
 	public Product updateProduct(Product product) {
 		//TODO Find a better way to do that
