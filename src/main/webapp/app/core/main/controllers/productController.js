@@ -27,31 +27,32 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
 
     var checksProductsValidity = function () {
         var batchesByProduct = [];
-        var currentsDate = todaysDate();
 
         _.forEach(productCtrl.productsList, function (product) {
             ProductService.getBatchesByProduct(product.barCode)
                 .then(function successCallback(response) {
                     batchesByProduct = response;
                     productCtrl.productsBatches[product.barCode] = batchesByProduct;
-                    
-                    _.forEach(productCtrl.productsBatches[product.barCode], function (batch) {
-                        if (batch.expirationDate < currentsDate && product.quantity > 0) {
-                            product.quantity -= batch.numberOfItems;        
-                        }
-                    });
-
-                    if (product.quantity === 0) {
-                        product.statusCode = 2;
-                    }
-
-                    ProductService.updateProduct(product.barCode, product)
-                        .then(function successCallback(response) {
-                        }, function errorCallback(error) {
-                        });
+                    checksForAllBatches(product);
+                    updateProduct(product);
                 }, function errorCallback(error) {
                 });
         });
+    };
+
+    var checksForAllBatches = function (product) {
+        _.forEach(productCtrl.productsBatches[product.barCode], function (batch) {
+            if (batch.expirationDate < todaysDate() && product.quantity > 0)
+                product.quantity -= batch.numberOfItems;        
+        });
+        if (product.quantity <= 0) product.statusCode = 2;
+    };
+
+    var updateProduct = function (product) {
+        ProductService.updateProduct(product.barCode, product)
+            .then(function successCallback(response) {
+            }, function errorCallback(error) {
+            });
     };
 
     var todaysDate = function () {
