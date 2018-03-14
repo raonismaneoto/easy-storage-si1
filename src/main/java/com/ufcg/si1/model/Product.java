@@ -29,10 +29,13 @@ public class Product {
 
 	private String category;
 	
-	public Status status; 
+	public Status status;
+
+	private int quantity;
 
 	public Product() {
 		this.price = new BigDecimal(0);
+		this.quantity = 0;
 	}
 
 	public Product(ProductDTO product) {
@@ -42,6 +45,7 @@ public class Product {
 		this.producer = product.getProducer();
 		this.category = product.getCategory();
 		this.status = product.getStatus();
+		this.quantity = product.getQuantity();
 	}
 
 	public String getName() {
@@ -94,6 +98,14 @@ public class Product {
 
 	public Status getStatus() {
 		return this.status;
+	}
+
+	public int getQuantity() {
+		return this.quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override

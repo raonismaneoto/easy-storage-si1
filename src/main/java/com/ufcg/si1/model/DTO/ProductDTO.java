@@ -33,12 +33,15 @@ public class ProductDTO {
     public Status status; 
     
 	public DiscountType discountType;
+
+	public int quantity;
 	
 
 	public ProductDTO() {
 		this.price = new BigDecimal(0);
 		this.status = Status.UNAVAILABLE;
 		this.discountType = DiscountType.NO_DISCOUNT;
+		this.quantity = 0;s
 	}
 
 
@@ -58,7 +61,8 @@ public class ProductDTO {
 		this.producer = product.getProducer();
 		this.category = category.getName();
         this.status = product.getStatus();
-        this.discountType = category.getDiscountType();
+		this.discountType = category.getDiscountType();
+		this.quantity = product.getQuantity();
 
     }
 
@@ -125,4 +129,13 @@ public class ProductDTO {
 	public double getDiscountMultiplyer() {
 		return this.discountType.getDiscountMultiplier();
 	}
+
+	public int getQuantity() {
+		return this.quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 }

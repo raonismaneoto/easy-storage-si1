@@ -11,9 +11,11 @@ import com.ufcg.si1.model.User;
 import com.ufcg.si1.model.Sale;
 import com.ufcg.si1.repositories.BatchRepository;
 import com.ufcg.si1.repositories.CategoryRepository;
+import com.ufcg.si1.repositories.ProductQuantityPairRepository;
 import com.ufcg.si1.repositories.ProductRepository;
 import com.ufcg.si1.repositories.SaleRepository;
 import com.ufcg.si1.repositories.UserRepository;
+import com.ufcg.si1.model.ProductQuantityPair;
 
 @Component
 public class DataBaseOperations {
@@ -32,6 +34,9 @@ public class DataBaseOperations {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    
+    @Autowired
+    private ProductQuantityPairRepository productQuantityRepository;
 
     private static DataBaseOperations dataBaseOperations;
 
@@ -70,6 +75,10 @@ public class DataBaseOperations {
     
     public Batch saveBatch(Batch batch) {
         return batchRepository.save(batch);
+    }
+
+    public void deleteBatch(long batchId) {
+        batchRepository.delete(batchId);
     }
 
     public List<Batch> getBatchesByProduct(Product product) {
@@ -119,5 +128,13 @@ public class DataBaseOperations {
     
     public List<Category> findAllCategories() {
         return categoryRepository.findAll();
+    }
+    //Database operations for productQuantityPair
+    public ProductQuantityPair getProductQuantityPair(long id) {
+        return this.productQuantityRepository.findOne(id);
+    }
+
+    public ProductQuantityPair saveProductQuantityPair(ProductQuantityPair pair) {
+        return productQuantityRepository.save(pair);
     }
 }

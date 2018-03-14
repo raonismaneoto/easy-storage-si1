@@ -52,7 +52,7 @@
             <h4 id="product-name">
               <a href="#">{{product.name}}</a>
             </h4>
-            <h5 id="product-price">
+            <h5 id="product-price" ng-if="product.statusCode === 1">
               <div>
                 {{productCtrl.getProductPrice(product)}}
               </div>
