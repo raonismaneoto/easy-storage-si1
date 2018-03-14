@@ -14,7 +14,6 @@ app.controller("DiscountDialogCtrl", function ($uibModalInstance, ProductService
         CategoryService.getAllCategories()
         .then(function successCallback(response) {
             discountDialogCtrl.categories = response.data;
-            console.log(discountDialogCtrl.categories);
         }, function errorCallback(error) {
         });
     };

@@ -106,7 +106,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
      * @param product - The product
      */
     productCtrl.getProductPrice = function(product) {
-        console.log(product);
         var price = '';
         if (product.statusCode ===  ProductStatus.AVAILABLE.value) {
             price = product.price*product.discountMultiplyer;

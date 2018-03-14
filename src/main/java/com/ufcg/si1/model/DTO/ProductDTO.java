@@ -41,7 +41,7 @@ public class ProductDTO {
 		this.price = new BigDecimal(0);
 		this.status = Status.UNAVAILABLE;
 		this.discountType = DiscountType.NO_DISCOUNT;
-		this.quantity = 0;s
+		this.quantity = 0;
 	}
 
 
