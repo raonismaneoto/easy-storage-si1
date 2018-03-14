@@ -36,10 +36,19 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
                     productCtrl.productsBatches[product.barCode] = batchesByProduct;
                     
                     _.forEach(productCtrl.productsBatches[product.barCode], function (batch) {
-                        if (batch.expirationDate < currentsDate) {
-                            
+                        if (batch.expirationDate < currentsDate && product.quantity > 0) {
+                            product.quantity -= batch.numberOfItems;        
                         }
                     });
+
+                    if (product.quantity === 0) {
+                        product.statusCode = 2;
+                    }
+
+                    ProductService.updateProduct(product.barCode, product)
+                        .then(function successCallback(response) {
+                        }, function errorCallback(error) {
+                        });
                 }, function errorCallback(error) {
                 });
         });
