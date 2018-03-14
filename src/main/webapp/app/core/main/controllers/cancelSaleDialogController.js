@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Controller for the dialog responsible for cancelling a sale
+ */
 (function () {
     var app = angular.module("efApp");
 
@@ -7,6 +10,9 @@
         SalesService, sale, sales) {
         var cancelSaleCtrl = this;
 
+        /**
+         * Cancels a sale
+         */
         cancelSaleCtrl.cancelSale = function cancelSale() {
             SalesService.deleteSale(sale.id).then(function success() {
                 _.remove(sales, function (currentSale) {
@@ -20,6 +26,9 @@
             });
         };
 
+        /**
+         * Closes the current modal
+         */
         cancelSaleCtrl.cancelDialog = function cancelDialog() {
             $uibModalInstance.dismiss('cancel');
         };

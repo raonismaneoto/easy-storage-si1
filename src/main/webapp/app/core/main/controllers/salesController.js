@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Controller responsible for sales
+ */
 (function () {
     var app = angular.module('efApp');
 
@@ -9,10 +12,16 @@
         
         salesCtrl.sales = [];
 
+        /**
+         * Returns true if the logged user is an administrator
+         */
         salesCtrl.isAdmin = function isAdmin() {
             return AuthService.isAdmin();
         };
 
+        /**
+         * Creates a modal dialog for creation of sale
+         */
         salesCtrl.openCreateSaleDialog = function openCreateSaleDialog() {
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Adicionar Venda',
@@ -28,6 +37,9 @@
             });
         };
 
+        /**
+         * Creates a modal dialog for cancelling a sale
+         */
         salesCtrl.openCancelSaleDialog = function openCancelSaleDialog(sale) {
             var modalInstance = $uibModal.open({
                 ariaLabelledBy: 'Remover venda',
@@ -61,6 +73,9 @@
             });
         };
 
+        /**
+         * Updates the list of sales
+         */
         function getSales() {
             SalesService.getSales().then(function success(data) {
                 salesCtrl.sales = data;

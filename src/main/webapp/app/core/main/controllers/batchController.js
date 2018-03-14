@@ -1,11 +1,15 @@
 'use strict';
 
+/**
+ * Batch Controller
+ */
 (function () {
 	var app = angular.module("efApp");
 
 	app.controller("BatchController", function BatchController($uibModalInstance, toastr, product, BatchService,ProductStatus) {
 		var batchCtrl = this;
 
+		/* The product of which the batch is made of */
 		batchCtrl.product = product;
 
 		batchCtrl.dateFormat = 'dd/MM/yyyy';
@@ -22,6 +26,11 @@
 			startingDay: 1
 		};
 
+		/**
+		 * Creates a new batch
+		 * @param expirationDate - The expiration date of the new batch
+		 * @param numberOfItems - How many products the batch has
+		 */
 		batchCtrl.createBatch = function createBatch(expirationDate, numberOfItems) {	
 	        var batch = {
                 expirationDate: expirationDate.getDay() + "/" + (expirationDate.getMonth() + 1) + "/" + expirationDate.getFullYear(),
@@ -39,10 +48,16 @@
             });
 		};
 
+		/**
+		 * Closes the current modal
+		 */
 		batchCtrl.closeDialog = function closeDialog () {
 	        $uibModalInstance.dismiss('cancel');
 	    };
 
+		/**
+		 * Opens the date picker for the expiration date
+		 */	
 		batchCtrl.openDatePicker = function openDatePicker() {
 			batchCtrl.datePicker.opened = true;
 		};
