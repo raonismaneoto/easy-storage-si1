@@ -30,5 +30,7 @@ public interface ProductBatchService {
 
 	Batch saveBatch(Batch batch);
 
+	void deleteBatch(long batchId);
+
 	List<Batch> getBatchesByProduct(Product product);
 }

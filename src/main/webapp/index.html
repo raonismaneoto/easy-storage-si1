@@ -55,15 +55,15 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container" ng-controller="AuthController as authCtrl">
     <div class="row">
       <div class="col-md-3">
         <p class="lead">Estoque Facil</p>
         <div class="list-group">
-          <a href="#!/products" class="list-group-menu list-group-item active" id="products-menu-item">
+          <a href="#!/products" class="list-group-menu list-group-item" ng-click="authCtrl.changeOption('product')" ng-class="authCtrl.firstOption? 'active': ''" id="products-menu-item">
             Produtos
           </a>
-          <a href="#!/sales" class="list-group-menu list-group-item" id="sales-menu-item">
+          <a href="#!/sales" class="list-group-menu list-group-item" ng-click="authCtrl.changeOption('sale')" ng-class="!authCtrl.firstOption ? 'active': ''" id="sales-menu-item">
             Vendas
           </a>
         </div>
@@ -123,6 +123,7 @@
   <script src="app/core/main/controllers/createSaleDialogController.js"></script>
   <script src="app/core/main/controllers/cancelSaleDialogController.js"></script>
   <script src="app/core/main/services/salesService.js"></script>
+  <script src="app/core/main/controllers/saleDetailsDialogController.js"></script>
 
 
 </body>

@@ -12,6 +12,7 @@
         createSaleCtrl.products = [];
         createSaleCtrl.saleProducts = [];
         createSaleCtrl.productsQuantity = [];
+        createSaleCtrl.productQuantity = {};
 
         /**
          * Creates a sale
@@ -68,10 +69,21 @@
          * @param product - The product to be added
          */
         createSaleCtrl.addProductAndQuantityPair = function addProductAndQuantityPair(quantity, product) {
-            createSaleCtrl.productsQuantity.push({
-                barCode: product.barCode, quantity: quantity
-            });
+            if(product.quantity >= quantity) {
+                createSaleCtrl.productsQuantity.push({
+                    barCode: product.barCode, quantity: quantity
+                });
+            } else {
+                warnProductQuantity(product);
+            }
         };
+
+        function warnProductQuantity(product) {
+            toastr.error('A quantidade máxima para esse produto é de: ' + product.quantity);
+                if(_.includes(createSaleCtrl.saleProducts, product)) {
+                    createSaleCtrl.addOrRemoveProduct(product);
+            }
+        }
 
         /**
          * Creates a new instance of a Sale class
@@ -90,7 +102,9 @@
          */
         function getAllProducts() {
             ProductService.getAllProducts().then(function sucess(response) {
-                createSaleCtrl.products = response.data;
+                createSaleCtrl.products = _.filter(response.data, (product) => {
+                    return product.quantity > 0;
+                });
             });
         }
 

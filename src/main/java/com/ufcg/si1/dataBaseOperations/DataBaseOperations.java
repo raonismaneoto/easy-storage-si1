@@ -72,6 +72,10 @@ public class DataBaseOperations {
         return batchRepository.save(batch);
     }
 
+    public void deleteBatch(long batchId) {
+        batchRepository.delete(batchId);
+    }
+
     public List<Batch> getBatchesByProduct(Product product) {
         return batchRepository.findByProduct(product);
     }

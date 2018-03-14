@@ -58,6 +58,20 @@
             });
         };
 
+        salesCtrl.openSaleDetailsDialog = function openSaleDetailsDialog(sale) {
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'Detalhe da venda',
+                ariaDescribedBy: 'Detalhes da venda',
+                templateUrl: 'app/core/main/views/saleDetailsDialog.html',
+                controller: 'SaleDetailsDialogController',
+                controllerAs: 'saleDetailsCtrl',
+                resolve: {
+                    sale: function() {
+                        return sale;
+                    }
+                }
+            });
+        };
 
         /**
          * Updates the list of sales

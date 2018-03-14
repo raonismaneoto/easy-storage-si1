@@ -63,11 +63,16 @@ public class ProductController {
 					HttpStatus.NOT_FOUND);
 		}
 		Batch batch = new Batch(product, batchDTO.getNumberOfItems(), batchDTO.getExpirationDate());
-		productBatchService.saveBatch(batch);
 		product.setQuantity(product.getQuantity() + batch.getNumberOfItems());
 		productBatchService.makeProductAvailable(product);
 		productBatchService.saveProduct(product);
+		productBatchService.saveBatch(batch);
 		return new ResponseEntity<BatchDTO>(batchDTO, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/batch/{id}", method = RequestMethod.DELETE)
+	public void deleteBatch(@PathVariable long id) {
+		productBatchService.deleteBatch(id);
 	}
 
 	@RequestMapping(value="/batch/{barCode}", method = RequestMethod.GET)

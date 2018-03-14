@@ -7,6 +7,8 @@ import com.ufcg.si1.dataBaseOperations.DataBaseOperations;
 import com.ufcg.si1.model.Product;
 import com.ufcg.si1.model.ProductQuantityPair;
 import com.ufcg.si1.model.Sale;
+import com.ufcg.si1.model.enumerations.Status;
+
 import java.util.List;
 
 @Service("saleService")
@@ -16,7 +18,7 @@ public class SaleServiceImpl implements SaleService {
     private DataBaseOperations dataBaseOperations;
 
     @Override
-    public Sale saveSale(Sale sale) {
+    public Sale saveSale(Sale sale) throws Exception{
         decreaseProductsQuantity(sale);
         return dataBaseOperations.saveSale(sale);
     }
@@ -32,23 +34,29 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public void deleteSale(long id) {
+    public void deleteSale(long id) throws Exception{
         increaseProductsQuantity(dataBaseOperations.getSale(id));
         dataBaseOperations.deleteSale(id);
     }
 
-    private void decreaseProductsQuantity(Sale sale) {
+    private void decreaseProductsQuantity(Sale sale) throws Exception{
         for(ProductQuantityPair pair: sale.getProductsQuantity()) {
             Product product = dataBaseOperations.findProduct(pair.getBarCode());
             product.setQuantity(product.getQuantity() - pair.getQuantity());
+            if(product.getQuantity() == 0) {
+                product.setStatus(Status.getByStatusCode(2));
+            }
             dataBaseOperations.saveProduct(product);
         }
     }
 
-    private void increaseProductsQuantity(Sale sale) {
+    private void increaseProductsQuantity(Sale sale) throws Exception {
         for(ProductQuantityPair pair: sale.getProductsQuantity()) {
             Product product = dataBaseOperations.findProduct(pair.getBarCode());
             product.setQuantity(product.getQuantity() + pair.getQuantity());
+            if(product.getQuantity() > 0) {
+                product.setStatus(Status.getByStatusCode(1));
+            }
             dataBaseOperations.saveProduct(product);
         }
     }
