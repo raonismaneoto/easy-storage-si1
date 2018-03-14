@@ -33,7 +33,7 @@
 		 */
 		batchCtrl.createBatch = function createBatch(expirationDate, numberOfItems) {	
 	        var batch = {
-                expirationDate: expirationDate.getDay() + "/" + (expirationDate.getMonth() + 1) + "/" + expirationDate.getFullYear(),
+                expirationDate: expirationDate.getDate() + "/" + (expirationDate.getMonth() + 1) + "/" + expirationDate.getFullYear(),
                 numberOfItems: numberOfItems
 			}
 
@@ -71,7 +71,6 @@
 
 	        var timeDiff = Math.abs(expirationDate.getTime() - currentDate.getTime());
 			var diffDays = timeDiff / (1000 * 3600 * 24); 
-			console.log(diffDays);
 	        
 	        if (diffDays < 30) {
 	            var notification = {
