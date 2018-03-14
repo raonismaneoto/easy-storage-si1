@@ -75,7 +75,11 @@
         authService.isAdmin = function isAdmin() {
             return authService.user.isAdmin();
         }
-
+        
+        authService.getCurrentUser = function getCurrentUser() {
+        	return authService.getLastUser();
+        }
+        
         /**
          * Updates then returns the user that is currently logged in
          */

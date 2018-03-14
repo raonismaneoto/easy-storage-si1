@@ -1,4 +1,5 @@
 package com.ufcg.si1.dataBaseOperations;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.ufcg.si1.model.Batch;
 import com.ufcg.si1.model.Product;
-import com.ufcg.si1.model.User;
 import com.ufcg.si1.model.Sale;
+import com.ufcg.si1.model.User;
+import com.ufcg.si1.notification.Notification;
 import com.ufcg.si1.repositories.BatchRepository;
+import com.ufcg.si1.repositories.NotificationRepository;
 import com.ufcg.si1.repositories.ProductQuantityPairRepository;
 import com.ufcg.si1.repositories.ProductRepository;
 import com.ufcg.si1.repositories.SaleRepository;
@@ -18,100 +21,105 @@ import com.ufcg.si1.model.ProductQuantityPair;
 @Component
 public class DataBaseOperations {
 
-    @Autowired
-    private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
-    @Autowired
-    private BatchRepository batchRepository;
-    
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private BatchRepository batchRepository;
 
-    @Autowired 
-    private SaleRepository saleRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private ProductQuantityPairRepository productQuantityRepository;
+	@Autowired
+	private SaleRepository saleRepository;
 
-    private static DataBaseOperations dataBaseOperations;
+	@Autowired
+	private NotificationRepository notificationRepository;
 
-    private DataBaseOperations() {}
+	private static DataBaseOperations dataBaseOperations;
 
-    public static DataBaseOperations getDataBaseOperations() {
+	private DataBaseOperations() {
+	}
 
-        if (dataBaseOperations == null) {
-            dataBaseOperations = new DataBaseOperations();
-        }
+	public static DataBaseOperations getDataBaseOperations() {
 
-        return dataBaseOperations;
-    }
+		if (dataBaseOperations == null) {
+			dataBaseOperations = new DataBaseOperations();
+		}
 
-    //Database operations for Products
-    public List<Product> findAllProducts() {
-    	return productRepository.findAll();
-    }
-    
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
-    }
+		return dataBaseOperations;
+	}
 
-    public Product findProduct(String barCode) {
-        return productRepository.findOne(barCode);
-    }
-    
-    public void deleteProduct(String barCode) {
-    	productRepository.delete(barCode);
-    }
-    
-    //Database operations for Batchs
-    public List<Batch> findAllBatches() {
-    	return batchRepository.findAll();
-    }
-    
-    public Batch saveBatch(Batch batch) {
-        return batchRepository.save(batch);
-    }
+	// Database operations for Products
+	public List<Product> findAllProducts() {
+		return productRepository.findAll();
+	}
 
-    public void deleteBatch(long batchId) {
-        batchRepository.delete(batchId);
-    }
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
 
-    public List<Batch> getBatchesByProduct(Product product) {
-        return batchRepository.findByProduct(product);
-    }
+	public Product findProduct(String barCode) {
+		return productRepository.findOne(barCode);
+	}
 
-    //Database operations for User
-    public User getUser(String username) {
-        return userRepository.findOne(username);
-    }
+	public void deleteProduct(String barCode) {
+		productRepository.delete(barCode);
+	}
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
+	// Database operations for Batchs
+	public List<Batch> findAllBatches() {
+		return batchRepository.findAll();
+	}
 
-    //Database operations for sale
-    public Sale getSale(long id) {
-        return saleRepository.findOne(id);
-    }
+	public Batch saveBatch(Batch batch) {
+		return batchRepository.save(batch);
+	}
 
-    public Sale saveSale(Sale sale) {
-        return saleRepository.save(sale);
-    }
+	public List<Batch> getBatchesByProduct(Product product) {
+		return batchRepository.findByProduct(product);
+	}
 
-    public void deleteSale(long id) {
-        saleRepository.delete(id);
-    }
+	// Database operations for User
+	public User getUser(String username) {
+		return userRepository.findOne(username);
+	}
 
-    public List<Sale> getSales() {
-        return saleRepository.findAll();
-    }
+	public User saveUser(User user) {
+		return userRepository.save(user);
+	}
 
-    //Database operations for productQuantityPair
-    public ProductQuantityPair getProductQuantityPair(long id) {
-        return this.productQuantityRepository.findOne(id);
-    }
+	// Database operations for sale
+	public Sale getSale(long id) {
+		return saleRepository.findOne(id);
+	}
 
-    public ProductQuantityPair saveProductQuantityPair(ProductQuantityPair pair) {
-        return productQuantityRepository.save(pair);
-    }
+	public Sale saveSale(Sale sale) {
+		return saleRepository.save(sale);
+	}
+
+	public void deleteSale(long id) {
+		saleRepository.delete(id);
+	}
+
+	public List<Sale> getSales() {
+		return saleRepository.findAll();
+	}
+
+	// Database operations for notification
+	public Notification getNotification(long id) {
+		return notificationRepository.findOne(id);
+	}
+
+	public Notification saveNotification(Notification notification) {
+		return notificationRepository.save(notification);
+	}
+
+	public void deleteNotification(long id) {
+		notificationRepository.delete(id);
+	}
+
+	public List<Notification> getNotifications() {
+		return notificationRepository.findAll();
+	}
 }

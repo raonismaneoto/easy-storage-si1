@@ -43,6 +43,26 @@
                 controllerAs: 'loginCtrl'
             });
         };
+        
+        authCtrl.openNotificationsDialog = function openNotificationsDialog() {
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'Notifications',
+                ariaDescribedBy: 'Notificações do Administrador',
+                templateUrl: 'app/core/main/views/notificationsView.html',
+                controller: 'AuthController',
+                controllerAs: 'authCtrl'
+            });
+        };
+        
+        authCtrl.openNotificationDialog = function openNotificationDialog() {
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'Notification',
+                ariaDescribedBy: 'Notificações do Administrador',
+                templateUrl: 'app/core/main/views/loginView.html',
+                controller: 'LoginController',
+                controllerAs: 'loginCtrl'
+            });
+        };
 
         /**
          * Returns true if some user is logged in, and false otherwise
@@ -62,6 +82,10 @@
                 AuthService.user = new User();
                 toastr.success("Logout efetuado com sucesso.");
             });
+        }
+        
+        authCtrl.isAdmin = function isAdmin() {
+        	return AuthService.isAdmin();
         }
     });
 })();

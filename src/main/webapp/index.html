@@ -29,7 +29,7 @@
         <a class="navbar-brand" href="#!/">Estoque Facil</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div ng-controller="AuthController as authCtrl" 
+      <div ng-controller="AuthController as authCtrl"
         class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
         <div ng-show="!authCtrl.isLogged()">
             <ul class="nav navbar-nav">
@@ -43,6 +43,11 @@
               </li>
             </ul>
         </div>
+        <ul class="nav navbar-nav" ng-show="authCtrl.isLogged() && authCtrl.isAdmin()">
+          <li>
+            <a href="" ng-click="authCtrl.openNotificationsDialog()">Notificações</a>
+          </li>
+        </ul>
         <ul class="nav navbar-nav" ng-show="authCtrl.isLogged()">
           <li>
             <a href="" ng-click="authCtrl.logout()">Deslogar</a>
@@ -74,7 +79,7 @@
       </div>
     </div>
   </div>
-  <!-- /.container --> 
+  <!-- /.container -->
 
   <div class="container">
     <hr>
@@ -110,9 +115,11 @@
   <script src="app/core/main/controllers/createProductDialogController.js"></script>
   <script src="app/core/main/controllers/updateProductPriceDialogController.js"></script>
   <script src="app/core/main/controllers/batchController.js"></script>
+  <script src="app/core/main/controllers/notificationController.js"></script>
   <script src="app/core/main/controllers/reportSupermarketDialogController.js"></script>
   <script src="app/core/main/services/authService.js"></script>
   <script src="app/core/main/services/productService.js"></script>
+  <script src="app/core/main/services/notificationService.js"></script>
   <script src="app/core/main/services/batchService.js"></script>
   <script src="app/common/constants/constants.js"></script>
   <script src="app/core/main/controllers/authController.js"></script>
