@@ -1,10 +1,10 @@
-app.controller("DiscountDialogCtrl", function ($uibModalInstance, ProductService, toastr,categories,CategoryService) {
+app.controller("DiscountDialogCtrl", function ($uibModalInstance, ProductService, toastr,categories,CategoryService,DiscountType) {
 
     var discountDialogCtrl = this;
 
     discountDialogCtrl.categories = [];
-    discountDialogCtrl.flagCollapse = [];
-    discountDialogCtrl.productBatches = [];
+
+    discountDialogCtrl.discounts = DiscountType;
 
     discountDialogCtrl.close = function () {
         $uibModalInstance.close('close');
@@ -15,6 +15,15 @@ app.controller("DiscountDialogCtrl", function ($uibModalInstance, ProductService
         .then(function successCallback(response) {
             discountDialogCtrl.categories = response.data;
             console.log(discountDialogCtrl.categories);
+        }, function errorCallback(error) {
+        });
+    };
+
+    discountDialogCtrl.changeDiscount = function (discount) {
+        discountDialogCtrl.category.discountType = discount.key;
+        discountDialogCtrl.category.priceMultiplyer = discount.discountMultiplyer;
+        CategoryService.updateCategory(discountDialogCtrl.category)
+        .then(function successCallback(response) {
         }, function errorCallback(error) {
         });
     };

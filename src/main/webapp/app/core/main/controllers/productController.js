@@ -25,18 +25,8 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
             });
     };
 
-    var loadCategoriesList = function () {
-        
-    }
-    productCtrl.loadCategoriesList = function () {
-        CategoryService.getAllCategories()
-            .then(function successCallback(response) {
-                productCtrl.categoriesList = response.data;
-                console.log(response.data);
-            }, function errorCallback(error) {
-            });
-    }
-    
+
+
     productCtrl.productsListIsEmpty = function () {
         return _.isEmpty(productCtrl.productsList);
     };
@@ -47,8 +37,9 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
     };
 
     productCtrl.getProductPrice = function(product) {
+        console.log(product);
         var price = '';
-        if (product.statusCode ==  ProductStatus.AVAILABLE.key) {
+        if (product.statusCode ===  ProductStatus.AVAILABLE.value) {
             price = product.price*product.discountMultiplyer;
             var priceString = "R$" + intToStringWith2DecimalDigits(price);
         }
@@ -60,7 +51,7 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         return number.toFixed(2)
     }
 
-    productCtrl.getProductStatus = function(product) { //Ver a lista da createProductDialogController
+    productCtrl.getProductStatus = function(product) { 
         if (product.statusCode === ProductStatus.AVAILABLE.value ) return  ProductStatus.AVAILABLE.label;
         if (product.statusCode === ProductStatus.UNAVAILABLE.value ) return  ProductStatus.UNAVAILABLE.label;
     }
@@ -103,7 +94,16 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
                     return angular.copy(productCtrl.categoriesList);
                 }
             }
+
         });
+
+        modalInstance.result.then(function (result) {
+                loadProductsList();
+            } ,function (result) {
+                loadProductsList();
+            });
+
+
     };
 
     productCtrl.openRegisterDialog = function() {

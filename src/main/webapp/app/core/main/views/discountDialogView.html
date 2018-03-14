@@ -6,14 +6,24 @@
 		<button class="btn btn-danger btn-sm" type="button" ng-click="discountDialogCtrl.close()">x</button>
 	</div>
 </div>
-	<div class="dropdown col-md-2" ng-if="productCtrl.isAdmin()">
-		<button class="btn btn-primary" type="button" data-toggle="dropdown">Categoria
-		  <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-		  <li ng-repeat="category in discountDialogCtrl.categories">
-			<a>{{category.name}}</a>
-		  </li>
-		</ul>
-	  </div>
+<div class="modal-body" id="modal-body">
+
+		<div class="btn-group">
+		<select class="btn btn-primary" ng-model="discountDialogCtrl.category">
+			<option ng-repeat="category in discountDialogCtrl.categories" ng-value="category" >{{category.name}}</option>
+		</select>
+	
+
+
+			<div class="btn-group">
+			<button class="btn btn-primary" type="button" data-toggle="dropdown">Desconto
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li ng-repeat="discount in discountDialogCtrl.discounts">
+				<a ng-click="discountDialogCtrl.changeDiscount(discount)">{{discount.label}}</a>
+				</li>
+				</ul>
+				</div>
+
 </div>

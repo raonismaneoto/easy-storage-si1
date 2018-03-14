@@ -11,7 +11,7 @@
         }
 
         categoryService.updateCategory = function updateProduct(category) {
-            return $http.put(BASE_SERVER_URL + "/product/category/" + category.name);
+            return $http.put(BASE_SERVER_URL + "/product/category",category);
         }
 
     })
