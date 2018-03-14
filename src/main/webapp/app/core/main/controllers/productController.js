@@ -20,7 +20,6 @@ app.controller("ProductCtrl", function ($scope, $uibModal, $http, toastr,$locati
         ProductService.getAllProducts()
             .then(function successCallback(response) {
                 productCtrl.productsList = response.data;
-                console.log(response.data); 
             }, function errorCallback(error) {
             });
     };
